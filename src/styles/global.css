@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+h1 {
+  @apply text-4xl font-bold;
+}
+
+h2 {
+  @apply text-2xl font-semibold;
+}
+
+body {
+  @apply bg-white text-gray-900;
+}
+
+a {
+  @apply text-blue-600 hover:underline;
+}
+
+@utility btn-primary {
+  @apply px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700;
+}

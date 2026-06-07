@@ -1,23 +1,64 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import "../styles/global.css";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+const lang = Astro.currentLocale || "es";
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+  </head>
+  <body>
+    <header
+      class="p-4 border-b border-gray-200 flex justify-between items-center max-w-4xl mx-auto"
+    >
+      <span class="font-bold text-xl">Pablo Works</span>
+      <span>
+        <select
+          id="lang-select"
+          name="lang"
+          class="border border-gray-300 p-1.5 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="es" selected={lang === "es"}>es</option>
+          <option value="en" selected={lang === "en"}>en</option>
+          <option value="fr" selected={lang === "fr"}>fr</option>
+        </select>
+      </span>
+    </header>
+    <slot />
+
+    <script>
+      const select = document.getElementById(
+        "lang-select",
+      ) as HTMLSelectElement | null;
+      select?.addEventListener("change", (e) => {
+        const target = e.target as HTMLSelectElement;
+        const newLang = target.value;
+        const pathSegments = window.location.pathname
+          .split("/")
+          .filter(Boolean);
+        const langs = ["es", "en", "fr"];
+
+        if (langs.includes(pathSegments[0])) {
+          pathSegments.shift();
+        }
+
+        let newPath = "/";
+        if (newLang !== "es") {
+          newPath += newLang + "/";
+        }
+        if (pathSegments.length > 0) {
+          newPath += pathSegments.join("/") + "/";
+        }
+
+        window.location.href = newPath;
+      });
+    </script>
+  </body>
+</html>
