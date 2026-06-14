@@ -1,3 +1,9 @@
 export default {
   welcome: "Welcome",
+  home: "Home",
+  about: "About",
+  projects: "Projects",
+  experience: "Experience",
+  skills: "Skills",
+  contact: "Contact",
 };

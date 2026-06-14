@@ -1,17 +1,21 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Welcome from "../components/Welcome.astro";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import { LANGUAGES, DEFAULT_LANGUAGE } from "../lib/i18n";
 
 export function getStaticPaths() {
   return [
     { params: { lang: undefined } },
-    { params: { lang: 'es' } },
-    { params: { lang: 'en' } },
-    { params: { lang: 'fr' } },
+    ...LANGUAGES.filter((lang) => lang !== DEFAULT_LANGUAGE).map((lang) => ({
+      params: { lang },
+    })),
   ];
 }
 ---
 
 <Layout>
-	<Welcome />
+  <main class="flex flex-row">
+    <Welcome />
+  </main>
 </Layout>

@@ -8,6 +8,11 @@ export const translations = {
   fr,
 };
 
-export function getTranslations(lang: keyof typeof translations) {
-  return translations[lang] ?? translations.es;
+export type Language = keyof typeof translations;
+
+export const LANGUAGES = Object.keys(translations) as Array<Language>;
+export const DEFAULT_LANGUAGE = 'es';
+
+export function getTranslations(lang: Language) {
+  return translations[lang] ?? translations[DEFAULT_LANGUAGE];
 }

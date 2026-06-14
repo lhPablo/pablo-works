@@ -1,0 +1,49 @@
+---
+import type { Language } from "../lib/i18n";
+import { LANGUAGES, DEFAULT_LANGUAGE } from "../lib/i18n";
+import Navbar from "./Navbar.astro";
+---
+
+<header
+  class="p-4 border-b border-gray-200 flex justify-between items-center max-w-4xl mx-auto"
+>
+  <Navbar />
+  <span>
+    <select
+      id="lang-select"
+      name="lang"
+      class="border border-gray-300 p-1.5 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      {
+        LANGUAGES.map((l: Language) => (
+          <option value={l} selected={Astro.currentLocale === l}>
+            {l}
+          </option>
+        ))
+      }
+    </select>
+  </span>
+</header>
+
+<script define:vars={{ languages: LANGUAGES, defaultLang: DEFAULT_LANGUAGE }}>
+  const select = document.getElementById("lang-select");
+  select?.addEventListener("change", (e) => {
+    const target = e.target;
+    const newLang = target.value;
+    const pathSegments = window.location.pathname.split("/").filter(Boolean);
+
+    if (languages.includes(pathSegments[0])) {
+      pathSegments.shift();
+    }
+
+    let newPath = "/";
+    if (newLang !== defaultLang) {
+      newPath += newLang + "/";
+    }
+    if (pathSegments.length > 0) {
+      newPath += pathSegments.join("/") + "/";
+    }
+
+    window.location.href = newPath;
+  });
+</script>
