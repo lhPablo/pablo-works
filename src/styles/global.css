@@ -1,4 +1,26 @@
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
+
+
+:root[data-theme="dark"] {
+  --background-color: #0d1117;
+  --surface-color:    #161b22;
+  --text-color:       #c9d1d9;
+
+  --primary-color:    #58a6ff;
+  --secondary-color:  #7ee787;
+  --accent-color:     #f778ba;
+}
+
+:root[data-theme="light"] {
+  --background-color: #f7f9fc;
+  --surface-color:    #ffffff;
+  --text-color:       #1f2937;
+
+  --primary-color:    #2563eb;
+  --secondary-color:  #10b981;
+  --accent-color:     #f59e0b;
+}
 
 h1 {
   @apply text-4xl font-bold;
@@ -9,13 +31,14 @@ h2 {
 }
 
 body {
-  @apply bg-white text-gray-900;
+  @apply bg-(--background-color) text-(--text-color);
+  font-family: var(--font-sans);
 }
 
 a {
-  @apply text-blue-600 hover:underline;
+  @apply text-(--primary-color) hover:underline;
 }
 
 @utility btn-primary {
-  @apply px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700;
+  @apply px-4 py-2 rounded bg-(--primary-color) text-(--text-color) hover:bg-(--secondary-color);
 }

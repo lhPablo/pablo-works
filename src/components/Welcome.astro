@@ -1,6 +1,8 @@
 ---
 import { getTranslations } from "../lib/i18n";
 
+import { Sun, Moon } from "@lucide/astro";
+
 const translations = getTranslations(Astro.currentLocale as any);
 ---
 
@@ -8,7 +10,41 @@ const translations = getTranslations(Astro.currentLocale as any);
   <main class="py-12 text-center">
     <section id="hero">
       <h1 class="mb-6">{translations.welcome}</h1>
-      <button class="btn-primary">Click me</button>
+
+      <button id="themeToggle" class="btn-primary" aria-label="Toggle theme">
+        <Sun class="h-5 w-5 dark:hidden" />
+        <Moon class="h-5 w-5 hidden dark:block" />
+      </button>
     </section>
   </main>
 </div>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggle");
+
+  function update(theme: string) {
+    const isDark = theme === "dark";
+    root.setAttribute("data-theme", theme);
+    root.classList.toggle("dark", isDark);
+  }
+
+  const saved = localStorage.getItem("theme");
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const theme = saved || (systemDark ? "dark" : "light");
+
+  update(theme);
+
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const isDark = root.classList.contains("dark");
+      const next = isDark ? "light" : "dark";
+
+      localStorage.setItem("theme", next);
+      update(next);
+    });
+  } else {
+    console.warn("Could not find themeToggle button!");
+  }
+</script>

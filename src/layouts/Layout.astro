@@ -12,6 +12,18 @@ import Header from "../components/Header.astro";
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
+
+    <script is:inline>
+      const saved = localStorage.getItem("theme");
+
+      const systemDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+
+      const theme = saved || (systemDark ? "dark" : "light");
+
+      document.documentElement.setAttribute("data-theme", theme);
+    </script>
   </head>
   <body>
     <Header />
