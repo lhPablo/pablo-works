@@ -1,8 +1,9 @@
 ---
 import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
 import { LANGUAGES, DEFAULT_LANGUAGE } from "../lib/i18n";
+import Section from "../components/Section.astro";
+import { SECTIONS } from "../data/sections";
 
 export function getStaticPaths() {
   return [
@@ -15,7 +16,13 @@ export function getStaticPaths() {
 ---
 
 <Layout>
-  <main class="flex flex-row">
+  <main class="w-full flex flex-col gap-2 items-center">
     <Welcome />
+
+    {
+      SECTIONS.map((section) => (
+        <Section title={section.title} content={section.content} />
+      ))
+    }
   </main>
 </Layout>
