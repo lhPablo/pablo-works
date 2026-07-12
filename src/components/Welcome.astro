@@ -6,18 +6,17 @@ import { Sun, Moon } from "@lucide/astro";
 const translations = getTranslations(Astro.currentLocale as any);
 ---
 
-<div id="container" class="max-w-4xl mx-auto p-4">
-  <main class="py-12 text-center">
-    <section id="hero">
-      <h1 class="mb-6">{translations.welcome}</h1>
+<section
+  id="home"
+  class="w-full h-screen flex flex-col items-center justify-center mx-auto p-4"
+>
+  <h1 class="mb-6">{translations.welcome}</h1>
 
-      <button id="themeToggle" class="btn-primary" aria-label="Toggle theme">
-        <Sun class="h-5 w-5 dark:hidden" />
-        <Moon class="h-5 w-5 hidden dark:block" />
-      </button>
-    </section>
-  </main>
-</div>
+  <button id="themeToggle" class="btn-primary" aria-label="Toggle theme">
+    <Sun class="h-5 w-5 dark:hidden" />
+    <Moon class="h-5 w-5 hidden dark:block" />
+  </button>
+</section>
 
 <script>
   const root = document.documentElement;

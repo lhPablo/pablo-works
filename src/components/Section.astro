@@ -1,13 +1,17 @@
 ---
 interface Props {
+  id: string;
   title: string;
   content: string;
 }
 
-const { title, content } = Astro.props;
+const { id, title, content } = Astro.props;
 ---
 
-<section class="w-full flex flex-col items-center min-h-80">
+<section
+  id={id}
+  class="w-full h-screen flex flex-col items-center justify-center"
+>
   <h1>{title}</h1>
   <p>{content}</p>
 </section>

@@ -1,44 +1,74 @@
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
 
+@layer base {
+  :root[data-theme="dark"] {
+    --background-color: #0d1117;
+    --surface-color: #161b22;
+    --text-color: #c9d1d9;
+    --border-color: #58a6ffcf;
 
-:root[data-theme="dark"] {
-  --background-color: #0d1117;
-  --surface-color:    #161b22;
-  --text-color:       #c9d1d9;
+    --primary-color: #58a6ff;
+    --secondary-color: #7ee787;
+    --accent-color: #f778ba;
+  }
 
-  --primary-color:    #58a6ff;
-  --secondary-color:  #7ee787;
-  --accent-color:     #f778ba;
+  :root[data-theme="light"] {
+    --background-color: #f7f9fc;
+    --surface-color: #ffffff;
+    --text-color: #1f2937;
+    --border-color: #cdced0;
+
+    --primary-color: #2563eb;
+    --secondary-color: #10b981;
+    --accent-color: #f59e0b;
+  }
+
+  html {
+  scroll-behavior: smooth;
 }
 
-:root[data-theme="light"] {
-  --background-color: #f7f9fc;
-  --surface-color:    #ffffff;
-  --text-color:       #1f2937;
+  body {
+    @apply bg-(--background-color) text-(--text-color);
+    font-family: var(--font-sans);
+  }
 
-  --primary-color:    #2563eb;
-  --secondary-color:  #10b981;
-  --accent-color:     #f59e0b;
+  h1 {
+    @apply text-4xl font-bold;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold;
+  }
+
+  a {
+    @apply text-(--primary-color) hover:underline;
+  }
 }
 
-h1 {
-  @apply text-4xl font-bold;
+@layer components {
+  header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 1px;
+    background-color: var(--border-color);
+    transition: width 0.3s ease-in-out;
+  }
+
+  .header-scrolled {
+    @apply bg-(--background-color)/60 backdrop-blur-md shadow-sm;
+  }
+
+  .header-scrolled::after {
+    width: 100%;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 rounded bg-(--primary-color) text-(--text-color) hover:bg-(--secondary-color);
+  }
 }
 
-h2 {
-  @apply text-2xl font-semibold;
-}
-
-body {
-  @apply bg-(--background-color) text-(--text-color);
-  font-family: var(--font-sans);
-}
-
-a {
-  @apply text-(--primary-color) hover:underline;
-}
-
-@utility btn-primary {
-  @apply px-4 py-2 rounded bg-(--primary-color) text-(--text-color) hover:bg-(--secondary-color);
-}

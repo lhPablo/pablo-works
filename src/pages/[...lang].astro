@@ -21,7 +21,11 @@ export function getStaticPaths() {
 
     {
       SECTIONS.map((section) => (
-        <Section title={section.title} content={section.content} />
+        <Section
+          id={section.id}
+          title={section.title}
+          content={section.content}
+        />
       ))
     }
   </main>
