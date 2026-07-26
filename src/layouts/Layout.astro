@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 ---
@@ -12,6 +13,9 @@ import Header from "../components/Header.astro";
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
+
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-mono" />
 
     <script is:inline>
       const saved = localStorage.getItem("theme");
