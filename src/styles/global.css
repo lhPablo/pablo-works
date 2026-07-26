@@ -1,27 +1,27 @@
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --color-background: #f7f9fc;
+  --color-surface: #ffffff;
+  --color-foreground: #1f2937;
+  --color-border: #cdced0;
+
+  --color-primary: #2563eb;
+  --color-secondary: #10b981;
+  --color-accent: #f59e0b;
+}
+
 @layer base {
   :root[data-theme="dark"] {
-    --background-color: #0d1117;
-    --surface-color: #161b22;
-    --text-color: #c9d1d9;
-    --border-color: #58a6ffcf;
+    --color-background: #0d1117;
+    --color-surface: #161b22;
+    --color-foreground: #c9d1d9;
+    --color-border: #58a6ffcf;
 
-    --primary-color: #58a6ff;
-    --secondary-color: #7ee787;
-    --accent-color: #f778ba;
-  }
-
-  :root[data-theme="light"] {
-    --background-color: #f7f9fc;
-    --surface-color: #ffffff;
-    --text-color: #1f2937;
-    --border-color: #cdced0;
-
-    --primary-color: #2563eb;
-    --secondary-color: #10b981;
-    --accent-color: #f59e0b;
+    --color-primary: #58a6ff;
+    --color-secondary: #7ee787;
+    --color-accent: #f778ba;
   }
 
   html {
@@ -29,8 +29,7 @@
 }
 
   body {
-    @apply bg-(--background-color) text-(--text-color);
-    font-family: var(--font-sans);
+    @apply bg-background text-foreground;
   }
 
   h1 {
@@ -42,7 +41,7 @@
   }
 
   a {
-    @apply text-(--primary-color) hover:underline;
+    @apply text-primary hover:underline;
   }
 }
 
@@ -55,12 +54,12 @@
     transform: translateX(-50%);
     width: 0%;
     height: 1px;
-    background-color: var(--border-color);
+    background-color: var(--color-border);
     transition: width 0.3s ease-in-out;
   }
 
   .header-scrolled {
-    @apply bg-(--background-color)/60 backdrop-blur-md shadow-sm;
+    @apply bg-background/60 backdrop-blur-md shadow-sm;
   }
 
   .header-scrolled::after {
@@ -68,7 +67,7 @@
   }
 
   .btn-primary {
-    @apply px-4 py-2 rounded bg-(--primary-color) text-(--text-color) hover:bg-(--secondary-color);
+    @apply px-4 py-2 rounded bg-primary text-foreground hover:bg-secondary;
   }
 }
 
