@@ -2,22 +2,22 @@ export const SECTIONS = [
   {
     id: "about",
     title: "about",
-    content: "parrafo",
+    content: "aboutMeParagraph",
   },
   {
     id: "projects",
     title: "projects",
-    content: "parrafo",
+    content: "projectsParagraph",
   },
   {
     id: "experience",
     title: "experience",
-    content: "parrafo",
+    content: "experienceParagraph",
   },
   {
     id: "skills",
     title: "skills",
-    content: "parrafo",
+    content: "skillsParagraph",
   },
   {
     id: "contact",

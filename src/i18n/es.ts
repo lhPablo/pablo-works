@@ -1,9 +1,15 @@
 export default {
   welcome: "Bienvenido",
+  toggleTheme: "Cambiar tema",
+  goHome: "Ir al inicio",
   home: "Inicio",
   about: "Sobre mí",
   projects: "Proyectos",
   experience: "Experiencia",
   skills: "Habilidades",
   contact: "Contacto",
+  aboutMeParagraph: "Soy un desarrollador de software con experiencia en el desarrollo de software. He trabajado en el desarrollo de software para empresas de diferentes tamaños y en diferentes industrias. También he trabajado como desarrollador de software para organizaciones sin fines de lucro.",
+  projectsParagraph: "Aquí tienes algunos de los proyectos más relevantes en los que he trabajado, prueba1, prueba2, prueba3",
+  experienceParagraph: "Aquí tienes algunas de las experiencias más relevantes en las que he trabajado, prueba1, prueba2, prueba3",
+  skillsParagraph: "Aquí tienes algunas de las habilidades más relevantes en las que he trabajado, prueba1, prueba2, prueba3",
 };

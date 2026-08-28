@@ -1,9 +1,15 @@
 export default {
   welcome: "Bienvenue",
+  toggleTheme: "Changer de thème",
+  goHome: "Aller à l'accueil",
   home: "Accueil",
   about: "À propos de moi",
   projects: "Projets",
   experience: "Expérience",
   skills: "Compétences",
   contact: "Contact",
+  aboutMeParagraph: "Je suis un développeur de logiciel avec expérience dans le développement de logiciels. J'ai travaillé sur le développement de logiciels pour entreprises de différentes tailles et dans différentes industries. J'ai également travaillé comme développeur de logiciels pour des organisations à but non lucratif.",
+  projectsParagraph: "Voici quelques-uns des projets les plus pertinents sur lesquels j'ai travaillé, prueba1, prueba2, prueba3",
+  experienceParagraph: "Voici quelques-unes des expériences les plus pertinentes sur lesquelles j'ai travaillé, prueba1, prueba2, prueba3",
+  skillsParagraph: "Voici quelques-unes des compétences les plus pertinentes sur lesquelles j'ai travaillé, prueba1, prueba2, prueba3",
 };

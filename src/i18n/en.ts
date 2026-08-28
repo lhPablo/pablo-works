@@ -1,9 +1,15 @@
 export default {
   welcome: "Welcome",
+  toggleTheme: "Toggle theme",
+  goHome: "Go to home",
   home: "Home",
   about: "About",
   projects: "Projects",
   experience: "Experience",
   skills: "Skills",
   contact: "Contact",
+  aboutMeParagraph: "I am a software developer with experience in software development. I have worked in software development for companies of different sizes and in different industries. I have also worked as a software developer for non-profit organizations.",
+  projectsParagraph: "Here are some of the most relevant projects I have worked on, prueba1, prueba2, prueba3",
+  experienceParagraph: "Here are some of the most relevant experiences I have worked on, prueba1, prueba2, prueba3",
+  skillsParagraph: "Here are some of the most relevant skills I have worked on, prueba1, prueba2, prueba3",
 };

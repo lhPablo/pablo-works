@@ -12,7 +12,7 @@ const translations = getTranslations(Astro.currentLocale);
 >
   <h1 class="mb-6">{translations.welcome}</h1>
 
-  <button id="themeToggle" class="btn-primary" aria-label="Toggle theme">
+  <button id="themeToggle" class="btn-primary" aria-label={translations.toggleTheme}>
     <Sun class="h-5 w-5 dark:hidden" />
     <Moon class="h-5 w-5 hidden dark:block" />
   </button>

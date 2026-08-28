@@ -1,4 +1,6 @@
 ---
+import { getTranslations } from "../lib/i18n";
+
 interface Props {
   id: string;
   title: string;
@@ -6,12 +8,14 @@ interface Props {
 }
 
 const { id, title, content } = Astro.props;
+
+const translations = getTranslations(Astro.currentLocale);
 ---
 
 <section
   id={id}
   class="w-full h-screen flex flex-col items-center justify-center"
 >
-  <h1>{title}</h1>
-  <p>{content}</p>
+  <h1>{translations[title as keyof typeof translations] ?? title}</h1>
+  <p>{translations[content as keyof typeof translations] ?? content}</p>
 </section>
