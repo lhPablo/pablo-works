@@ -2,3 +2,5 @@ allowBuilds:
   esbuild: false
   puppeteer: set this to true or false
   sharp: false
+minimumReleaseAgeExclude:
+  - astro@7.2.9
