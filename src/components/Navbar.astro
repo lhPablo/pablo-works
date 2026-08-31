@@ -1,11 +1,15 @@
 ---
-import Logo from "./Logo.astro";
 import LanguageSelector from "./LanguageSelector.astro";
 import NavLinks from "./NavLinks.astro";
+import ThemeSelector from "./ThemeSelector.astro";
 ---
 
-<nav class="w-full flex justify-start items-center gap-2">
-  <Logo />
+<nav
+  class="header-nav flex gap-x-1 px-4 py-1.5 text-sm font-medium rounded-full justify-center items-center"
+>
   <NavLinks />
-  <LanguageSelector />
+  <div class="flex items-center gap-x-4 pl-4 border-l border-border">
+    <ThemeSelector />
+    <LanguageSelector />
+  </div>
 </nav>

@@ -3,23 +3,7 @@ import Navbar from "./Navbar.astro";
 ---
 
 <header
-  class="sticky top-0 z-50 w-full p-4 flex justify-between items-center mx-auto"
+  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-4"
 >
   <Navbar />
 </header>
-
-<script>
-  const SCROLL_THRESHOLD = 80;
-
-  const handleScroll = () => {
-    const header = document.querySelector("header");
-
-    if (header && window.scrollY > SCROLL_THRESHOLD) {
-      header.classList.add("header-scrolled");
-    } else if (header) {
-      header.classList.remove("header-scrolled");
-    }
-  };
-
-  document.addEventListener("scroll", handleScroll);
-</script>

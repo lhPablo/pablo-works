@@ -1,0 +1,44 @@
+---
+import { getTranslations } from "../lib/i18n";
+
+import { Sun, Moon } from "@lucide/astro";
+
+const translations = getTranslations(Astro.currentLocale);
+---
+
+<button
+  id="themeToggle"
+  class="bg-transparent hover:text-accent hover:scale-110 transition-all duration-200"
+  aria-label={translations.toggleTheme}
+>
+  <Sun class="h-5 w-5 not-dark:hidden" />
+  <Moon class="h-5 w-5 dark:hidden" />
+</button>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggle");
+
+  function update(theme: string) {
+    root.setAttribute("data-theme", theme);
+  }
+
+  const saved = localStorage.getItem("theme");
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const theme = saved || (systemDark ? "dark" : "light");
+
+  update(theme);
+
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const isDark = root.getAttribute("data-theme") === "dark";
+      const next = isDark ? "light" : "dark";
+
+      localStorage.setItem("theme", next);
+      update(next);
+    });
+  } else {
+    console.warn("Could not find themeToggle button!");
+  }
+</script>

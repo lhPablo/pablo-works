@@ -1,47 +1,49 @@
 ---
 import type { Language } from "../lib/i18n";
-import { LANGUAGES, DEFAULT_LANGUAGE } from "../lib/i18n";
+import {
+  LANGUAGES,
+  LANGUAGE_NAMES,
+  DEFAULT_LANGUAGE,
+  getTranslations,
+} from "../lib/i18n";
+
+const translations = getTranslations(Astro.currentLocale);
+const currentLang = (Astro.currentLocale ?? DEFAULT_LANGUAGE) as Language;
+
+// First element always is the language, remove it to get the rest of the segments
+const [, ...segments] = Astro.url.pathname.split("/").filter(Boolean);
+const rest = segments.length > 0 ? `${segments.join("/")}/` : "";
+
+const hrefFor = (lang: Language) => `/${lang}/${rest}`;
 ---
 
-<span>
-  <select
-    id="lang-select"
-    name="lang"
-    class="border border-gray-300 p-1.5 rounded-md bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-  >
-    {
-      LANGUAGES.map((l: Language) => (
-        <option value={l} selected={Astro.currentLocale === l}>
-          {l}
-        </option>
-      ))
-    }
-  </select>
-</span>
-
-<script
-  is:inline
-  define:vars={{ languages: LANGUAGES, defaultLang: DEFAULT_LANGUAGE }}
+<div
+  class="flex items-center gap-0.5"
+  role="group"
+  aria-label={translations.selectLanguage}
 >
-  const select = document.getElementById("lang-select");
+  {
+    LANGUAGES.map((lang: Language) => {
+      const isCurrent = lang === currentLang;
 
-  select?.addEventListener("change", (e) => {
-    const target = e.target;
-    const newLang = target.value;
-    const pathSegments = window.location.pathname.split("/").filter(Boolean);
-
-    if (languages.includes(pathSegments[0])) {
-      pathSegments.shift();
-    }
-
-    let newPath = "/";
-    if (newLang !== defaultLang) {
-      newPath += newLang + "/";
-    }
-    if (pathSegments.length > 0) {
-      newPath += pathSegments.join("/") + "/";
-    }
-
-    window.location.href = newPath;
-  });
-</script>
+      return (
+        <a
+          href={hrefFor(lang)}
+          hreflang={lang}
+          lang={lang}
+          aria-label={LANGUAGE_NAMES[lang]}
+          aria-current={isCurrent ? "true" : undefined}
+          class:list={[
+            "rounded-full px-2 py-0.5 text-xs font-medium uppercase tracking-wide transition-colors",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60",
+            isCurrent
+              ? "bg-accent/10 text-accent font-semibold"
+              : "text-foreground/45 hover:text-accent",
+          ]}
+        >
+          {lang}
+        </a>
+      );
+    })
+  }
+</div>

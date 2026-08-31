@@ -2,31 +2,39 @@
 @variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-  --color-background: #f7f9fc;
-  --color-surface: #ffffff;
-  --color-foreground: #1f2937;
-  --color-border: #cdced0;
-
   --color-primary: #2563eb;
   --color-secondary: #10b981;
   --color-accent: #f59e0b;
+
+  --color-background: #f7f9fc;
+  --color-surface: #ffffff;
+  --color-foreground: #1f2937;
+
+  --color-nav: #ffffffe6;
+  --shadow-nav:
+    0 10px 15px -3px #0000001a,
+    0 4px 6px -4px #0000001a;
 }
 
 @layer base {
   :root[data-theme="dark"] {
-    --color-background: #0d1117;
-    --color-surface: #161b22;
-    --color-foreground: #c9d1d9;
-    --color-border: #58a6ffcf;
-
     --color-primary: #58a6ff;
     --color-secondary: #7ee787;
     --color-accent: #f778ba;
+    
+    --color-background: #0d1117;
+    --color-surface: #161b22;
+    --color-foreground: #c9d1d9;
+
+    --color-nav: #21262de6;
+    --shadow-nav:
+      0 8px 24px -6px #00000073,
+      0 4px 8px -4px #0000004d;
   }
 
   html {
-  scroll-behavior: smooth;
-}
+    scroll-behavior: smooth;
+  }
 
   body {
     @apply bg-background text-foreground;
@@ -39,35 +47,39 @@
   h2 {
     @apply text-2xl font-semibold;
   }
-
-  a {
-    @apply text-primary hover:underline;
-  }
 }
 
 @layer components {
-  header::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0%;
-    height: 1px;
-    background-color: var(--color-border);
-    transition: width 0.3s ease-in-out;
-  }
-
-  .header-scrolled {
-    @apply bg-background/60 backdrop-blur-md shadow-sm;
-  }
-
-  .header-scrolled::after {
-    width: 100%;
-  }
-
   .btn-primary {
     @apply px-4 py-2 rounded bg-primary text-foreground hover:bg-secondary;
   }
+
+  .header-nav {
+    background-color: var(--color-nav);
+    box-shadow: var(--shadow-nav);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .header-nav {
+      animation: nav-appear 1s linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 100px;
+    }
+  }
 }
 
+@keyframes nav-appear {
+  from {
+    box-shadow: none;
+    backdrop-filter: none;
+    background-color: var(--color-background);
+  }
+
+  to {
+    box-shadow: var(--shadow-nav);
+    backdrop-filter: blur(12px);
+    background-color: var(--color-nav);
+  }
+}
