@@ -1,5 +1,6 @@
 export default {
   welcome: "Bienvenido",
+  notFound: "Esta página no existe",
   toggleTheme: "Cambiar tema",
   selectLanguage: "Seleccionar idioma",
   goHome: "Ir al inicio",
@@ -12,5 +13,5 @@ export default {
   aboutMeParagraph: "Soy un desarrollador de software con experiencia en el desarrollo de software. He trabajado en el desarrollo de software para empresas de diferentes tamaños y en diferentes industrias. También he trabajado como desarrollador de software para organizaciones sin fines de lucro.",
   projectsParagraph: "Aquí tienes algunos de los proyectos más relevantes en los que he trabajado, prueba1, prueba2, prueba3",
   experienceParagraph: "Aquí tienes algunas de las experiencias más relevantes en las que he trabajado, prueba1, prueba2, prueba3",
-  skillsParagraph: "Aquí tienes algunas de las habilidades más relevantes en las que he trabajado, prueba1, prueba2, prueba3",
+  skillsParagraph: "Aquí tienes algunas de las habilidades más relevantes en las que he trabajado, prueba1, prueba2, prueba3"
 };

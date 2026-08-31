@@ -2,6 +2,12 @@
 import { Font } from "astro:assets";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
+
+interface Props {
+  showHeader?: boolean;
+}
+
+const { showHeader = true } = Astro.props;
 ---
 
 <!doctype html>
@@ -30,7 +36,7 @@ import Header from "../components/Header.astro";
     </script>
   </head>
   <body>
-    <Header />
+    {showHeader && <Header />}
     <slot />
   </body>
 </html>
