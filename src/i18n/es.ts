@@ -1,6 +1,7 @@
 export default {
   welcome: "Bienvenido",
   toggleTheme: "Cambiar tema",
+  selectLanguage: "Seleccionar idioma",
   goHome: "Ir al inicio",
   home: "Inicio",
   about: "Sobre mí",
