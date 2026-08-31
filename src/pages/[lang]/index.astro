@@ -1,0 +1,25 @@
+---
+import Welcome from "../../components/Welcome.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getLocalePaths } from "../../lib/i18n";
+import Section from "../../components/Section.astro";
+import { SECTIONS } from "../../data/sections";
+
+export const getStaticPaths = getLocalePaths;
+---
+
+<Layout>
+  <main class="w-full flex flex-col gap-2 items-center">
+    <Welcome />
+
+    {
+      SECTIONS.map((section) => (
+        <Section
+          id={section.id}
+          title={section.title}
+          content={section.content}
+        />
+      ))
+    }
+  </main>
+</Layout>

@@ -10,11 +10,15 @@ export default defineConfig({
 
   i18n: {
     defaultLocale: "es",
-    locales: ["es", "en", "fr"],
+    locales: ["es", "en"],
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: false,
+    },
   },
 
   fonts: [
-      {
+    {
       provider: fontProviders.google(),
       name: "Inter",
       cssVariable: "--font-sans",
