@@ -56,6 +56,13 @@
   }
 }
 
+@utility nav-link {
+  &.active {
+    @apply text-accent;
+    @apply bg-accent/10;
+  }
+}
+
 @layer components {
   .btn-primary {
     @apply px-4 py-2 rounded bg-primary text-foreground hover:bg-secondary;

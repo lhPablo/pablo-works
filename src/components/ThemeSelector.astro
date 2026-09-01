@@ -16,27 +16,18 @@ const translations = getTranslations(Astro.currentLocale);
 </button>
 
 <script>
-  const root = document.documentElement;
-  const btn = document.getElementById("themeToggle");
+  type Theme = "light" | "dark";
 
-  function update(theme: string) {
-    root.setAttribute("data-theme", theme);
-  }
-
-  const saved = localStorage.getItem("theme");
-  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const theme = saved || (systemDark ? "dark" : "light");
-
-  update(theme);
+  const root: HTMLElement = document.documentElement;
+  const btn: HTMLElement | null = document.getElementById("themeToggle");
 
   if (btn) {
     btn.addEventListener("click", () => {
-      const isDark = root.getAttribute("data-theme") === "dark";
-      const next = isDark ? "light" : "dark";
+      const isDark: boolean = root.dataset.theme === "dark";
+      const next: Theme = isDark ? "light" : "dark";
 
       localStorage.setItem("theme", next);
-      update(next);
+      root.dataset.theme = next;
     });
   } else {
     console.warn("Could not find themeToggle button!");

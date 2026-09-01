@@ -11,7 +11,8 @@ const translations = getTranslations(Astro.currentLocale);
       return (
         <a
           href={`#${section.id}`}
-          class="rounded-full p-2 hover:text-accent focus-ring"
+          data-section={section.id}
+          class="rounded-full p-2 hover:text-accent nav-link focus-ring"
         >
           {translations[section.title as keyof typeof translations]}
         </a>
@@ -19,3 +20,39 @@ const translations = getTranslations(Astro.currentLocale);
     })
   }
 </div>
+
+<script>
+  const links: Map<string, HTMLAnchorElement> = new Map(
+    [
+      ...document.querySelectorAll<HTMLAnchorElement>(
+        ".nav-link[data-section]",
+      ),
+    ].map((link: HTMLAnchorElement) => [link.dataset.section!, link]),
+  );
+
+  const sections: NodeListOf<HTMLElement> =
+    document.querySelectorAll<HTMLElement>("#main-page > section");
+
+  if (sections.length) {
+    const observer: IntersectionObserver = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry: IntersectionObserverEntry) => {
+          const link: HTMLAnchorElement | undefined = links.get(
+            entry.target.id,
+          );
+          if (!link) return;
+
+          link.classList.toggle("active", entry.isIntersecting);
+          if (entry.isIntersecting) {
+            link.ariaCurrent = "true";
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+</script>
