@@ -35,7 +35,7 @@ const hrefFor = (lang: Language) => `/${lang}/${rest}`;
           aria-current={isCurrent ? "true" : undefined}
           class:list={[
             "rounded-full px-2 py-0.5 text-xs font-medium uppercase tracking-wide transition-colors",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60",
+            "focus-ring",
             isCurrent
               ? "bg-accent/10 text-accent font-semibold"
               : "text-foreground/45 hover:text-accent",
