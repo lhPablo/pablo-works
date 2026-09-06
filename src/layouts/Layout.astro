@@ -1,13 +1,18 @@
 ---
 import { Font } from "astro:assets";
-import "../styles/global.css";
 import Header from "../components/Header.astro";
+import { LANGUAGES, DEFAULT_LANGUAGE } from "../lib/i18n";
+import "../styles/global.css";
 
 interface Props {
   showHeader?: boolean;
+  noindex?: boolean;
 }
 
-const { showHeader = true } = Astro.props;
+const { showHeader = true, noindex = false } = Astro.props;
+
+const localeHref = (lang: string) =>
+  new URL(Astro.url.pathname.replace(/^\/[^\/]+/, `/${lang}`), Astro.site).href;
 ---
 
 <!doctype html>
@@ -18,6 +23,26 @@ const { showHeader = true } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <>
+          <link
+            rel="canonical"
+            href={new URL(Astro.url.pathname, Astro.site).href}
+          />
+          {LANGUAGES.map((lang) => (
+            <link rel="alternate" hreflang={lang} href={localeHref(lang)} />
+          ))}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={localeHref(DEFAULT_LANGUAGE)}
+          />
+        </>
+      )
+    }
     <title>Pablo López — Software Engineer</title>
 
     <Font cssVariable="--font-sans" preload />

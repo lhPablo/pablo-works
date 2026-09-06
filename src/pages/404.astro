@@ -5,7 +5,7 @@ import { getTranslations, DEFAULT_LANGUAGE } from "../lib/i18n";
 const translations = getTranslations(Astro.currentLocale);
 ---
 
-<Layout showHeader={false}>
+<Layout showHeader={false} noindex>
   <main
     class="w-full h-screen flex flex-col items-center justify-center gap-4 p-4 text-center"
   >
