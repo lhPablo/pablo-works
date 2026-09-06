@@ -22,24 +22,23 @@ const translations = getTranslations(Astro.currentLocale);
 </div>
 
 <script>
-  const links: Map<string, HTMLAnchorElement> = new Map(
+  const links = new Map<string, HTMLAnchorElement>(
     [
       ...document.querySelectorAll<HTMLAnchorElement>(
         ".nav-link[data-section]",
       ),
-    ].map((link: HTMLAnchorElement) => [link.dataset.section!, link]),
+    ].map((link) => [link.dataset.section!, link]),
   );
 
-  const sections: NodeListOf<HTMLElement> =
-    document.querySelectorAll<HTMLElement>("#main-page > section");
+  const sections = document.querySelectorAll<HTMLElement>(
+    "#main-page > section",
+  );
 
   if (sections.length) {
-    const observer: IntersectionObserver = new IntersectionObserver(
-      (entries: IntersectionObserverEntry[]) => {
-        entries.forEach((entry: IntersectionObserverEntry) => {
-          const link: HTMLAnchorElement | undefined = links.get(
-            entry.target.id,
-          );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const link = links.get(entry.target.id);
           if (!link) return;
 
           link.classList.toggle("active", entry.isIntersecting);
