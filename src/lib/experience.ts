@@ -1,4 +1,4 @@
-import { PROFILE } from "../data/profile";
+import { PROFILE } from "@data/profile";
 
 export function yearsOfExperience(from = PROFILE.careerStart, to = new Date()) {
     let years = to.getFullYear() - from.getFullYear();

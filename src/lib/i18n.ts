@@ -1,5 +1,5 @@
-import es from '../i18n/es';
-import en from '../i18n/en';
+import es from '@i18n/es';
+import en from '@i18n/en';
 
 export const translations = {
   es,

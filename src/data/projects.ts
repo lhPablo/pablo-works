@@ -1,4 +1,4 @@
-import placeholder from "../assets/placeholder.webp"
+import placeholder from "@assets/placeholder.webp"
 
 export const PROJECTS = [
   {

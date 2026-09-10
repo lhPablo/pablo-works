@@ -1,4 +1,4 @@
-import AstroIcon from "../assets/astro.svg";
+import AstroIcon from "@assets/astro.svg";
 
 export const SKILLS = [
   {
