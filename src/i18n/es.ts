@@ -2,7 +2,7 @@ export default {
   heroGreeting: "Hola, soy {{name}}",
   heroParagraph: "{{yearsOfExperience}} años de experiencia en desarrollo de software",
   profile: "Perfil",
-  viewCV: "Descargar CV",
+  downloadCV: "Descargar CV",
   contact: "Contacto",
   notFound: "Esta página no existe",
   toggleTheme: "Cambiar tema",

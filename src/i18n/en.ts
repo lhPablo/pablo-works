@@ -3,7 +3,7 @@ export default {
   heroGreeting: "Hello, I'm {{name}}",
   heroParagraph: "{{yearsOfExperience}} years of experience in software development",
   profile: "Profile",
-  viewCV: "Download CV",
+  downloadCV: "Download CV",
   contact: "Contact",
   notFound: "This page does not exist",
   toggleTheme: "Toggle theme",
