@@ -1,0 +1,81 @@
+---
+import { PROFILE } from "../data/profile";
+import { yearsOfExperience } from "../lib/experience";
+import {
+  getTranslations,
+  splitByPlaceholder,
+  type SplitByPlaceholderResult,
+} from "../lib/i18n";
+import ActionLink from "./ActionLink.astro";
+import LinkedinIcon from "./icons/LinkedinIcon.astro";
+import { Image } from "astro:assets";
+import { Mail } from "@lucide/astro";
+
+const translations = getTranslations(Astro.currentLocale);
+const splitName: SplitByPlaceholderResult = splitByPlaceholder(
+  translations.heroGreeting,
+  "{{name}}",
+);
+const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
+  translations.heroParagraph,
+  "{{yearsOfExperience}}",
+);
+---
+
+<section
+  id="home"
+  class="w-full h-screen flex flex-col-reverse gap-15 items-center justify-center lg:max-w-4xl md:max-w-2xl sm:flex-row"
+>
+  <div class="flex flex-col gap-2 items-start justify-start">
+    <header class="flex flex-col gap-2 items-start justify-start">
+      <h1>
+        {splitName.before}
+        <span class="text-accent">{PROFILE.name}</span>
+        {splitName.after}
+      </h1>
+      <h2 class="text-accent">{PROFILE.role}</h2>
+    </header>
+    <p>
+      {splitYears.before}{yearsOfExperience()}{splitYears.after}
+    </p>
+    <nav class="flex gap-4 text-xs">
+      <ActionLink
+        href={PROFILE.cv}
+        target="_blank"
+        rel="noopener noreferrer"
+        id="viewCV"
+        class="border rounded-full p-2 cursor-pointer hover:text-accent focus-ring"
+      >
+        {translations.viewCV}
+      </ActionLink>
+      <ActionLink
+        href={PROFILE.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        icon={LinkedinIcon}
+        iconClass="h-4 w-4"
+        aria-label="Linkedin"
+      >
+        Linkedin
+      </ActionLink>
+
+      <ActionLink
+        href={`mailto:${PROFILE.email}`}
+        icon={Mail}
+        iconClass="h-4 w-4"
+        aria-label={translations.contact}
+      >
+        {translations.contact}
+      </ActionLink>
+    </nav>
+  </div>
+
+  <div class="flex">
+    <Image
+      src={PROFILE.image}
+      alt={translations.profile}
+      width={256}
+      height={256}
+    />
+  </div>
+</section>

@@ -20,6 +20,16 @@ export const LANGUAGE_NAMES: Record<Language, string> = {
   en: 'English',
 };
 
+export type SplitByPlaceholderResult = {
+  before: string;
+  after: string;
+}
+
+export function splitByPlaceholder(template: string, placeholder: string): SplitByPlaceholderResult {
+  const [before, after = ''] = template.split(placeholder);
+  return { before, after };
+}
+
 export function getLocalePaths() {
   return LANGUAGES.map((lang) => ({ params: { lang } }));
 }

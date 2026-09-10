@@ -18,10 +18,5 @@ export const SECTIONS = [
     id: "skills",
     title: "skills",
     content: "skillsParagraph",
-  },
-  {
-    id: "contact",
-    title: "contact",
-    content: "parrafo",
   }
 ];

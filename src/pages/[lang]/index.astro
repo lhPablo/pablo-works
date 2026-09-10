@@ -1,16 +1,16 @@
 ---
-import Welcome from "../../components/Welcome.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getLocalePaths } from "../../lib/i18n";
 import Section from "../../components/Section.astro";
 import { SECTIONS } from "../../data/sections";
+import Hero from "../../components/Hero.astro";
 
 export const getStaticPaths = getLocalePaths;
 ---
 
 <Layout>
   <main id="main-page" class="w-full flex flex-col gap-2 items-center">
-    <Welcome />
+    <Hero />
 
     {
       SECTIONS.map((section) => (
