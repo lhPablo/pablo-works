@@ -1,9 +1,9 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { getLocalePaths } from "../../lib/i18n";
+import Hero from "../../components/Hero.astro";
 import Section from "../../components/Section.astro";
 import { SECTIONS } from "../../data/sections";
-import Hero from "../../components/Hero.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getLocalePaths } from "../../lib/i18n";
 
 export const getStaticPaths = getLocalePaths;
 ---
@@ -14,11 +14,7 @@ export const getStaticPaths = getLocalePaths;
 
     {
       SECTIONS.map((section) => (
-        <Section
-          id={section.id}
-          title={section.title}
-          content={section.content}
-        />
+        <Section id={section.id} component={section.component} />
       ))
     }
   </main>

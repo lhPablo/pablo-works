@@ -1,8 +1,10 @@
 ---
-import { Font } from "astro:assets";
-import Header from "../components/Header.astro";
-import { LANGUAGES, DEFAULT_LANGUAGE } from "../lib/i18n";
 import "../styles/global.css";
+
+import { Font } from "astro:assets";
+
+import Header from "../components/Header.astro";
+import { DEFAULT_LANGUAGE,LANGUAGES } from "../lib/i18n";
 
 interface Props {
   showHeader?: boolean;
