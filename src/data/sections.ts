@@ -5,9 +5,9 @@ import Skills from "@components/Skills.astro";
 
 export const SECTIONS = [
   {
-    id: "about",
-    title: "about",
-    component: About
+    id: "experience",
+    title: "experience",
+    component: Experience
   },
   {
     id: "projects",
@@ -15,9 +15,9 @@ export const SECTIONS = [
     component: Projects
   },
   {
-    id: "experience",
-    title: "experience",
-    component: Experience
+    id: "about",
+    title: "about",
+    component: About
   },
   {
     id: "skills",

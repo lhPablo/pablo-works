@@ -1,0 +1,20 @@
+---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+interface Props {
+  name: string;
+  icon: AstroComponentFactory;
+  color: string;
+}
+
+const props: Props = Astro.props;
+const Icon = props.icon;
+---
+
+<li
+  class="glow-item flex items-center justify-center p-4"
+  style={`--brand-color: ${props.color}`}
+  title={props.name}
+>
+  <Icon class="relative z-10 h-8 w-8" aria-label={props.name} />
+</li>

@@ -63,6 +63,46 @@
   }
 }
 
+@utility glow-item {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    box-shadow: 0 0 35px 8px var(--brand-color);
+    transition: box-shadow 0.7s ease;
+  }
+
+  &:hover::after {
+    box-shadow: 0 0 35px 15px var(--brand-color);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: 0.7em;
+    border: 1px solid transparent;
+    backdrop-filter: blur(30px);
+    transition:
+      border-color 0.7s ease,
+      backdrop-filter 0.7s ease;
+  }
+
+  &:hover::before {
+    border-color: var(--brand-color);
+    backdrop-filter: blur(14px);
+  }
+}
+
 @layer components {
   .btn-primary {
     @apply px-4 py-2 rounded bg-primary text-foreground hover:bg-secondary;

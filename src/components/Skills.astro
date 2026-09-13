@@ -1,18 +1,14 @@
 ---
+import Skill from "@components/Skill.astro";
 import { SKILLS } from "@data/skills";
-import { getTranslations } from "@lib/i18n";
-import { Image } from "astro:assets";
-
-const translations = getTranslations(Astro.currentLocale);
 ---
 
-<div class="flex gap-2 items-center justify-start">
+<ul
+  class="grid grid-cols-4 sm:grid-cols-6 gap-10 items-center justify-items-center"
+>
   {
-    SKILLS.map((skill) => (
-      <div class="flex flex-col gap-2 items-center justify-start">
-        <p>{skill.name}</p>
-        <Image src={skill.image} alt={skill.name} />
-      </div>
+    SKILLS.map((item) => (
+      <Skill name={item.name} icon={item.icon} color={item.color} />
     ))
   }
-</div>
+</ul>
