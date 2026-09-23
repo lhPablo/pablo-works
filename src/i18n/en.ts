@@ -14,7 +14,7 @@ export default {
   projects: "Projects",
   experience: "Experience",
   skills: "Skills",
-  aboutMeParagraph: "I am a software developer with experience in software development. I have worked in software development for companies of different sizes and in different industries. I have also worked as a software developer for non-profit organizations.",
+  aboutMeParagraph: "I specialize in building robust full stack products, paying close attention to how the backend and frontend fit together. I've helped teams of different sizes ship features that made it to production and are still used daily, always prioritizing code that's easy for the next person to maintain. I work well in a team, with honest code reviews and direct communication, and I adapt quickly to new tools and ways of working.",
   projectsParagraph: "Here are some of the most relevant projects I have worked on, prueba1, prueba2, prueba3",
   experienceParagraph: "Here are some of the most relevant experiences I have worked on, prueba1, prueba2, prueba3",
   skillsParagraph: "Here are some of the most relevant skills I have worked on, prueba1, prueba2, prueba3"

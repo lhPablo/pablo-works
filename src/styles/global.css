@@ -51,15 +51,45 @@
 
 @utility focus-ring {
   &:focus-visible {
-    outline: none;
-    @apply ring-2 ring-accent/60;
+    @apply outline-none ring-2 ring-accent/60;
   }
 }
 
 @utility nav-link {
   &.active {
-    @apply text-accent;
-    @apply bg-accent/10;
+    @apply text-accent bg-accent/10;
+  }
+}
+
+@utility historic-items {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    @apply top-0 -left-5 w-0.5 h-full rounded-xl bg-foreground/80 -translate-x-1/2;
+  }
+}
+
+@utility historic-item {
+  --dot-x: --spacing(-5.5);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: var(--dot-x);
+    z-index: -1;
+    @apply top-1/2 size-3 rounded-full bg-accent -translate-x-1/2 -translate-y-1/2;
+  }
+
+  &:last-child::after {
+    content: "";
+    position: absolute;
+    left: var(--dot-x);
+    z-index: -1;
+    @apply top-1/2 size-5 rounded-full bg-accent/50 -translate-x-1/2 -translate-y-1/2 animate-ping;
   }
 }
 
@@ -70,36 +100,28 @@
     content: "";
     position: absolute;
     z-index: -2;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    box-shadow: 0 0 35px 8px var(--brand-color);
+    @apply top-1/2 left-1/2 size-2.5 rounded-full -translate-x-1/2 -translate-y-1/2;
+    box-shadow: 0 0 2.1875rem 0.5rem var(--brand-color);
     transition: box-shadow 0.7s ease;
   }
 
   &:hover::after {
-    box-shadow: 0 0 35px 15px var(--brand-color);
+    box-shadow: 0 0 2.1875rem 0.9375rem var(--brand-color);
   }
 
   &::before {
     content: "";
     position: absolute;
     z-index: -1;
-    inset: 0;
-    border-radius: 0.7em;
-    border: 1px solid transparent;
-    backdrop-filter: blur(30px);
+    @apply inset-0 rounded-xl border border-transparent backdrop-blur-xl;
     transition:
       border-color 0.7s ease,
       backdrop-filter 0.7s ease;
   }
 
   &:hover::before {
+    @apply backdrop-blur-lg;
     border-color: var(--brand-color);
-    backdrop-filter: blur(14px);
   }
 }
 
@@ -109,10 +131,9 @@
   }
 
   .header-nav {
+    @apply backdrop-blur-md;
     background-color: var(--color-nav);
     box-shadow: var(--shadow-nav);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
   }
 
   @supports (animation-timeline: scroll()) {

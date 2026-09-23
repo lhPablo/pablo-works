@@ -1,0 +1,22 @@
+---
+import JobCard from "@components/sections/experience/JobCard.astro";
+import { EXPERIENCE } from "@data/experience";
+import { getTranslations } from "@lib/i18n";
+
+const translations = getTranslations(Astro.currentLocale);
+---
+
+<h1>{translations["experience"]}</h1>
+<ol class="historic-items flex flex-col-reverse gap-5 justify-start py-2 my-5">
+  {
+    EXPERIENCE.map((exp) => (
+      <JobCard
+        company={exp.company}
+        from={exp.from}
+        to={exp.to}
+        role={exp.role}
+        description={exp.description}
+      />
+    ))
+  }
+</ol>
