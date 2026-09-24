@@ -47,6 +47,10 @@
   h2 {
     @apply text-2xl font-semibold;
   }
+
+  h3 {
+    @apply text-sm tracking-widest text-accent uppercase my-1
+  }
 }
 
 @utility focus-ring {
@@ -126,6 +130,10 @@
 }
 
 @layer components {
+  .card {
+    @apply flex flex-col border-2 border-white/10 bg-white/5 p-4 rounded-xl shadow-lg;
+  }
+
   .btn-primary {
     @apply px-4 py-2 rounded bg-primary text-foreground hover:bg-secondary;
   }
