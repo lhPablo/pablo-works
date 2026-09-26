@@ -13,7 +13,7 @@ export default {
   projects: "Proyectos",
   experience: "Experiencia",
   skills: "Habilidades",
-  aboutMeParagraph: "Me especializo en construir productos full stack robustos, con especial atención a que el backend y el frontend encajen bien entre sí. He ayudado a equipos de distintos tamaños a sacar adelante funcionalidades que llegaron a producción y siguen usándose a diario, priorizando siempre que el código sea fácil de mantener por quien venga después. Trabajo bien en equipo, con revisiones de código honestas y comunicación directa, y me adapto rápido a herramientas y formas de trabajar nuevas.",
+  aboutMeParagraph: "Me especializo en construir productos <span class='text-accent'>full stack</span> robustos, con especial atención a que el backend y el frontend encajen bien entre sí. He ayudado a equipos de distintos tamaños a sacar adelante funcionalidades que <span class='text-accent'>llegaron a producción</span> y siguen usándose a diario, priorizando siempre que el código sea fácil de mantener por quien venga después. Trabajo bien en equipo, con <span class='text-accent'>revisiones de código honestas</span> y comunicación directa, y me adapto rápido a herramientas y formas de trabajar nuevas.",
   projectsParagraph: "Aquí tienes algunos de los proyectos más relevantes en los que he trabajado, prueba1, prueba2, prueba3",
   experienceParagraph: "Aquí tienes algunas de las experiencias más relevantes en las que he trabajado, prueba1, prueba2, prueba3",
   skillsParagraph: "Aquí tienes algunas de las habilidades más relevantes en las que he trabajado, prueba1, prueba2, prueba3",
