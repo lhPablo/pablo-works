@@ -77,7 +77,7 @@
 }
 
 @utility historic-item {
-  --dot-x: --spacing(-5.5);
+  --dot-x: --spacing(-5);
   position: relative;
 
   &::before {

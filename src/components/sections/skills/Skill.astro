@@ -10,10 +10,10 @@ interface Props {
 const { name, icon: Icon, color } = Astro.props;
 ---
 
-<li
+<div
   class="glow-item flex items-center justify-center p-4"
   style={`--brand-color: ${color}`}
   title={name}
 >
   <Icon class="relative z-10 h-8 w-8" aria-label={name} />
-</li>
+</div>

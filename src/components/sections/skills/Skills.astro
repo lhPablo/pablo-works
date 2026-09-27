@@ -8,7 +8,9 @@ import { SKILLS } from "@data/skills";
 >
   {
     SKILLS.map((item) => (
-      <Skill name={item.name} icon={item.icon} color={item.color} />
+      <li>
+        <Skill name={item.name} icon={item.icon} color={item.color} />
+      </li>
     ))
   }
 </ul>

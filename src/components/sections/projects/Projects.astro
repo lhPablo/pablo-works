@@ -13,11 +13,13 @@ const translations = getTranslations(Astro.currentLocale);
 <ul class="flex gap-2 items-center justify-start">
   {
     PROJECTS.map((project) => (
-      <ProjectCard
-        name={project.name}
-        description={project.description}
-        url={project.url}
-      />
+      <li>
+        <ProjectCard
+          name={project.name}
+          description={project.description}
+          url={project.url}
+        />
+      </li>
     ))
   }
 </ul>

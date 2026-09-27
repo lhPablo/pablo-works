@@ -19,7 +19,9 @@ const translations = getTranslations(Astro.currentLocale);
   <ul class="grid grid-cols-3 gap-5">
     {
       TRAITS.map((trait) => (
-        <TraitCard title={trait.title} description={trait.description} />
+        <li>
+          <TraitCard title={trait.title} description={trait.description} />
+        </li>
       ))
     }
   </ul>

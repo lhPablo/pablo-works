@@ -10,13 +10,15 @@ const translations = getTranslations(Astro.currentLocale);
 <ol class="historic-items flex flex-col-reverse gap-5 justify-start py-2 my-5">
   {
     EXPERIENCE.map((exp) => (
-      <JobCard
-        company={exp.company}
-        from={exp.from}
-        to={exp.to}
-        role={exp.role}
-        description={exp.description}
-      />
+      <li class="historic-item">
+        <JobCard
+          company={exp.company}
+          from={exp.from}
+          to={exp.to}
+          role={exp.role}
+          description={exp.description}
+        />
+      </li>
     ))
   }
 </ol>
