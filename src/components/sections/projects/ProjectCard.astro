@@ -1,0 +1,15 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  url: string;
+}
+
+const { name, description, url } = Astro.props;
+---
+
+<li class="card">
+  <p>{name}</p>
+  <p>{description}</p>
+  <p>{url}</p>
+</li>
