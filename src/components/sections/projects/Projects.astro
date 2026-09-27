@@ -1,0 +1,23 @@
+---
+import { PROJECTS } from "@data/projects";
+import { getTranslations } from "@lib/i18n";
+
+import ProjectCard from "./ProjectCard.astro";
+
+const translations = getTranslations(Astro.currentLocale);
+---
+
+<h3>{translations["projects"]}</h3>
+<p>{translations["projectsParagraph"]}</p>
+
+<ul class="flex gap-2 items-center justify-start">
+  {
+    PROJECTS.map((project) => (
+      <ProjectCard
+        name={project.name}
+        description={project.description}
+        url={project.url}
+      />
+    ))
+  }
+</ul>

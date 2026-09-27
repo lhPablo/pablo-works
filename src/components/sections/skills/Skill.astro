@@ -7,14 +7,13 @@ interface Props {
   color: string;
 }
 
-const props: Props = Astro.props;
-const Icon = props.icon;
+const { name, icon: Icon, color } = Astro.props;
 ---
 
 <li
   class="glow-item flex items-center justify-center p-4"
-  style={`--brand-color: ${props.color}`}
-  title={props.name}
+  style={`--brand-color: ${color}`}
+  title={name}
 >
-  <Icon class="relative z-10 h-8 w-8" aria-label={props.name} />
+  <Icon class="relative z-10 h-8 w-8" aria-label={name} />
 </li>
