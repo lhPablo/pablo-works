@@ -1,5 +1,6 @@
 ---
-import ActionBar from "@components/ui/ActionBar.astro";
+import LinkedinIcon from "@components/icons/Linkedin.astro";
+import ActionLink from "@components/ui/ActionLink.astro";
 import { PROFILE } from "@data/profile";
 import { yearsOfExperience } from "@lib/experience";
 import {
@@ -7,6 +8,7 @@ import {
   splitByPlaceholder,
   type SplitByPlaceholderResult,
 } from "@lib/i18n";
+import { Mail } from "@lucide/astro";
 import { Image } from "astro:assets";
 
 const translations = getTranslations(Astro.currentLocale);
@@ -24,7 +26,7 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
   id="home"
   class="w-full h-screen flex flex-col-reverse gap-15 items-center justify-center lg:max-w-4xl md:max-w-2xl sm:flex-row"
 >
-  <div class="flex flex-col gap-2 items-start justify-start">
+  <div class="flex flex-col gap-5 items-start justify-start">
     <header class="flex flex-col gap-2 items-start justify-start">
       <h1>
         {splitName.before}
@@ -36,7 +38,34 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
     <p>
       {splitYears.before}{yearsOfExperience()}{splitYears.after}
     </p>
-    <ActionBar />
+    <nav class="flex gap-4 text-xs">
+      <ActionLink
+        href={PROFILE.cv}
+        target="_blank"
+        rel="noopener noreferrer"
+        id="downloadCV"
+      >
+        {translations.downloadCV}
+      </ActionLink>
+      <ActionLink
+        href={PROFILE.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        icon={LinkedinIcon}
+        iconClass="h-4 w-4"
+        aria-label="Linkedin"
+      >
+        Linkedin
+      </ActionLink>
+      <ActionLink
+        href={`mailto:${PROFILE.email}`}
+        icon={Mail}
+        iconClass="h-4 w-4"
+        aria-label={translations.contact}
+      >
+        {translations.contact}
+      </ActionLink>
+    </nav>
   </div>
 
   <div class="flex">
