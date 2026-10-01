@@ -51,6 +51,10 @@
   h3 {
     @apply text-sm tracking-widest text-accent uppercase my-1
   }
+
+  h4 {
+    @apply text-accent font-mono
+  }
 }
 
 @utility focus-ring {
