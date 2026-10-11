@@ -2,24 +2,23 @@
 import { PROJECTS } from "@data/projects";
 import { getTranslations } from "@lib/i18n";
 
-import ProjectCard from "./ProjectCard.astro";
+import ProjectInfo from "./ProjectInfo.astro";
 
 const translations = getTranslations(Astro.currentLocale);
 ---
 
 <h3>{translations["projects"]}</h3>
-<p>{translations["projectsParagraph"]}</p>
 
-<ul class="flex gap-2 items-center justify-start">
-  {
-    PROJECTS.map((project) => (
-      <li>
-        <ProjectCard
-          name={project.name}
-          description={project.description}
-          url={project.url}
-        />
-      </li>
-    ))
-  }
-</ul>
+<div class="p-8 flex flex-col gap-5">
+  <p>{translations["projectsParagraph"]}</p>
+
+  <ul class="flex flex-col items-stretch gap-10">
+    {
+      PROJECTS.map((project) => (
+        <li>
+          <ProjectInfo project={project} />
+        </li>
+      ))
+    }
+  </ul>
+</div>
