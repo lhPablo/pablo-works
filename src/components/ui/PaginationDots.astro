@@ -1,0 +1,91 @@
+---
+interface Props {
+  count: number;
+}
+
+const { count } = Astro.props;
+---
+
+<div
+  class="absolute bottom-3 left-0 flex w-full items-center justify-center gap-2"
+  data-dots
+>
+  <span
+    class="pointer-events-none absolute top-0 left-0 z-10 h-2 w-2 rounded-full bg-accent opacity-0"
+    aria-hidden="true"
+    data-indicator
+  >
+  </span>
+  {
+    Array.from({ length: count }, (_, index) => (
+      <button
+        type="button"
+        class="h-2 w-2 cursor-pointer rounded-full bg-gray-900 opacity-50 transition-all duration-300 hover:scale-130 aria-[current=true]:bg-accent aria-[current=true]:opacity-100 "
+        data-index={index}
+        aria-label={`Slide ${index + 1}`}
+        aria-current={index === 0 ? "true" : undefined}
+      />
+    ))
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-dots]").forEach((dots) => {
+    const indicator = dots.querySelector<HTMLElement>("[data-indicator]");
+    const buttons = dots.querySelectorAll("button");
+
+    if (!indicator) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let current = 0;
+
+    const animateIndicator = (from: HTMLElement, to: HTMLElement) => {
+      if (reducedMotion.matches) return;
+
+      const start = Math.min(from.offsetLeft, to.offsetLeft);
+      const end = Math.max(from.offsetLeft, to.offsetLeft) + to.offsetWidth;
+
+      indicator.getAnimations().forEach((animation) => animation.cancel());
+      indicator.animate(
+        [
+          {
+            opacity: 1,
+            left: `${from.offsetLeft}px`,
+            width: `${from.offsetWidth}px`,
+          },
+          { opacity: 1, left: `${start}px`, width: `${end - start}px` },
+          {
+            opacity: 1,
+            left: `${to.offsetLeft}px`,
+            width: `${to.offsetWidth}px`,
+          },
+        ],
+        { duration: 450, easing: "cubic-bezier(0.65, 0, 0.35, 1)" },
+      );
+    };
+
+    const select = (index: number) => {
+      if (index === current) return;
+
+      animateIndicator(buttons[current], buttons[index]);
+
+      buttons[current].removeAttribute("aria-current");
+      current = index;
+      buttons[current].setAttribute("aria-current", "true");
+
+      dots.dispatchEvent(
+        new CustomEvent("dots:change", { detail: { index }, bubbles: true }),
+      );
+    };
+
+    dots.addEventListener("click", (event) => {
+      if (!(event.target instanceof Element)) return;
+
+      const button = event.target.closest("button");
+
+      if (button) {
+        select(Number(button.dataset.index));
+      }
+    });
+  });
+</script>

@@ -1,0 +1,48 @@
+---
+import placeholder from "@assets/placeholder.webp";
+import { Image } from "astro:assets";
+
+import PaginationDots from "./PaginationDots.astro";
+
+interface Props {
+  name: string;
+  images: ImageMetadata[];
+}
+
+const { name, images } = Astro.props;
+const slides = images.length > 0 ? images : [placeholder];
+---
+
+<div class="relative flex flex-col gap-2" data-carousel>
+  {
+    slides.map((image, index) => (
+      <Image
+        src={image}
+        alt={`Preview ${name} ${index + 1}`}
+        width={600}
+        height={400}
+        loading="eager"
+        class:list={["rounded-xl", index !== 0 && "hidden"]}
+        data-slide
+      />
+    ))
+  }
+  {slides.length > 1 && <PaginationDots count={slides.length} />}
+</div>
+
+<script>
+  type DotsChangeEventDetail = { index: number };
+  type DotsChangeEvent = CustomEvent<DotsChangeEventDetail>;
+
+  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const slides = carousel.querySelectorAll<HTMLImageElement>("[data-slide]");
+
+    carousel.addEventListener("dots:change", (event) => {
+      const { index } = (event as DotsChangeEvent).detail;
+
+      slides.forEach((slide, i) =>
+        slide.classList.toggle("hidden", i !== index),
+      );
+    });
+  });
+</script>
