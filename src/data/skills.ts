@@ -40,7 +40,7 @@ export const SKILLS = [
     color: "#BC52EE"
   },
   {
-    name: "Next.js",
+    name: "NextJS",
     icon: NextIcon,
     color: "#6b7280ff"
   },
@@ -54,4 +54,9 @@ export const SKILLS = [
     icon: SpringBootIcon,
     color: "#64bd45ff"
   },
-];
+] as const;
+
+export type SkillName = (typeof SKILLS)[number]["name"];
+
+export const getSkill = (name: SkillName) =>
+  SKILLS.find((skill) => skill.name === name) ?? null;
