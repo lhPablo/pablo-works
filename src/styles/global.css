@@ -34,6 +34,7 @@
 
   html {
     scroll-behavior: smooth;
+    @apply snap-y snap-mandatory;
   }
 
   body {
@@ -49,11 +50,15 @@
   }
 
   h3 {
-    @apply text-sm tracking-widest text-accent uppercase my-1
+    @apply text-sm tracking-widest text-accent uppercase my-1;
   }
 
   h4 {
-    @apply text-accent font-mono
+    @apply text-accent font-mono;
+  }
+
+  section {
+    @apply snap-start;
   }
 }
 
