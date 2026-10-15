@@ -7,6 +7,7 @@ export default {
   notFound: "Esta página no existe",
   toggleTheme: "Cambiar tema",
   selectLanguage: "Seleccionar idioma",
+  openMenu: "Abrir menú",
   goHome: "Ir al inicio",
   home: "Inicio",
   about: "Sobre mí",

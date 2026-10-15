@@ -1,0 +1,25 @@
+---
+interface Props {
+  class?: string;
+  faceClass?: string;
+}
+
+const { class: className, faceClass } = Astro.props;
+---
+
+<div class="group perspective-distant">
+  <div
+    class:list={[
+      "relative transition-transform duration-500 motion-reduce:transition-none transform-3d group-hover:rotate-y-180",
+      className,
+    ]}
+  >
+    <div class:list={["absolute inset-0 backface-hidden", faceClass]}>
+      <slot name="front" />
+    </div>
+
+    <div class:list={["absolute inset-0 backface-hidden rotate-y-180", faceClass]}>
+      <slot name="back" />
+    </div>
+  </div>
+</div>

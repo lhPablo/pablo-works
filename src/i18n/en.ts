@@ -8,6 +8,7 @@ export default {
   notFound: "This page does not exist",
   toggleTheme: "Toggle theme",
   selectLanguage: "Select language",
+  openMenu: "Open menu",
   goHome: "Go to home",
   home: "Home",
   about: "About",

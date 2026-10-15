@@ -2,14 +2,62 @@
 import LanguageSelector from "@components/layout/LanguageSelector.astro";
 import NavLinks from "@components/layout/NavLinks.astro";
 import ThemeSelector from "@components/layout/ThemeSelector.astro";
+import BurgerButton from "@components/ui/BurgerButton.astro";
+import MobileMenu from "@components/ui/MobileMenu.astro";
+import { getTranslations } from "@lib/i18n";
+
+const translations = getTranslations(Astro.currentLocale);
 ---
 
 <nav
-  class="header-nav flex gap-x-1 px-4 py-1.5 text-sm font-medium rounded-full justify-center items-center"
+  class="header-nav pointer-events-auto relative flex gap-x-1 px-4 py-1.5 text-sm font-medium rounded-full justify-center items-center"
+  data-navbar
 >
-  <NavLinks />
-  <div class="flex items-center gap-x-4 pl-4 border-l border-border">
+  <MobileMenu id="nav-menu" data-nav-menu>
+    <NavLinks />
+  </MobileMenu>
+  <div
+    class="flex items-center gap-x-4 sm:pl-4 sm:border-l sm:border-border"
+  >
     <ThemeSelector />
     <LanguageSelector />
+    <BurgerButton
+      class="sm:hidden"
+      controls="nav-menu"
+      label={translations.openMenu}
+      data-nav-toggle
+    />
   </div>
 </nav>
+
+<script>
+  const navbar = document.querySelector<HTMLElement>("[data-navbar]");
+  const menu = navbar?.querySelector<HTMLElement>("[data-nav-menu]");
+  const toggle = navbar?.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+
+  if (navbar && menu && toggle) {
+    const setOpen = (open: boolean) => {
+      menu.toggleAttribute("data-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+
+    toggle.addEventListener("click", () =>
+      setOpen(!menu.hasAttribute("data-open")),
+    );
+
+    menu.addEventListener("click", (event) => {
+      if ((event.target as HTMLElement).closest("a")) setOpen(false);
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!navbar.contains(event.target as Node)) setOpen(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.hasAttribute("data-open")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>

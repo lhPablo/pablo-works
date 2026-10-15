@@ -1,4 +1,6 @@
 ---
+import FlipCard from "@components/ui/FlipCard.astro";
+
 interface Props {
   title: string;
   description: string;
@@ -7,20 +9,10 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<div class="group perspective-distant">
-  <div
-    class="relative card min-h-40 transition-transform duration-500 transform-3d group-hover:rotate-y-180"
-  >
-    <div
-      class="absolute inset-0 flex items-center justify-center text-center p-5 backface-hidden"
-    >
-      <h4>{title}</h4>
-    </div>
-
-    <div
-      class="absolute inset-0 flex items-center justify-center text-center p-5 backface-hidden rotate-y-180"
-    >
-      <p>{description}</p>
-    </div>
-  </div>
-</div>
+<FlipCard
+  class="card min-h-40"
+  faceClass="flex items-center justify-center text-center p-5"
+>
+  <h4 slot="front">{title}</h4>
+  <p slot="back">{description}</p>
+</FlipCard>

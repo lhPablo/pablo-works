@@ -2,6 +2,8 @@
 import Layout from "@layouts/Layout.astro";
 import { DEFAULT_LANGUAGE, getTranslations } from "@lib/i18n";
 
+import ActionLink from "@/components/ui/ActionLink.astro";
+
 const translations = getTranslations(Astro.currentLocale);
 ---
 
@@ -11,11 +13,8 @@ const translations = getTranslations(Astro.currentLocale);
   >
     <p class="font-mono text-6xl font-semibold text-accent">404</p>
     <h1>{translations.notFound}</h1>
-    <a
-      href={`/${DEFAULT_LANGUAGE}/`}
-      class="btn-primary rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-    >
+    <ActionLink href={`/${DEFAULT_LANGUAGE}/`}>
       {translations.goHome}
-    </a>
+    </ActionLink>
   </main>
 </Layout>

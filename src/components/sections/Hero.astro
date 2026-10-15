@@ -24,7 +24,7 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
 
 <section
   id="home"
-  class="w-full min-h-dvh flex flex-col-reverse gap-15 items-center justify-center lg:max-w-4xl md:max-w-2xl sm:flex-row"
+  class="w-full min-h-svh pt-header flex flex-col-reverse gap-15 items-center justify-center lg:max-w-4xl md:max-w-2xl sm:flex-row"
 >
   <div class="flex flex-col gap-5 items-start justify-start">
     <header class="flex flex-col gap-2 items-start justify-start">
@@ -38,7 +38,7 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
     <p>
       {splitYears.before}{yearsOfExperience()}{splitYears.after}
     </p>
-    <nav class="flex gap-4 text-xs">
+    <nav class="flex flex-wrap gap-4 text-xs">
       <ActionLink
         href={PROFILE.cv}
         target="_blank"
@@ -75,6 +75,7 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
       width={256}
       height={256}
       priority={true}
+      class="short:size-40"
     />
   </div>
 </section>
