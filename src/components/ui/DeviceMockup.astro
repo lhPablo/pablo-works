@@ -1,0 +1,144 @@
+---
+import frame from "@assets/projects/devices/frame.png";
+import laptopMask from "@assets/projects/devices/mask-laptop.png";
+import phoneMask from "@assets/projects/devices/mask-phone.png";
+import tabletMask from "@assets/projects/devices/mask-tablet.png";
+import type { ProjectMockup } from "@data/projects";
+import { Play } from "@lucide/astro";
+import { getImage, Image } from "astro:assets";
+
+interface Props {
+  name: string;
+  mockup: ProjectMockup;
+}
+
+const DEVICE_SCREEN = {
+  LAPTOP: "laptop",
+  TABLET: "tablet",
+  PHONE: "phone",
+} as const;
+
+const SCREENS = {
+  [DEVICE_SCREEN.LAPTOP]: {
+    left: 15.679,
+    top: 2.073,
+    width: 61.38,
+    height: 86.829,
+    mask: laptopMask,
+  },
+  [DEVICE_SCREEN.TABLET]: {
+    left: 60.098,
+    top: 13.374,
+    width: 26.228,
+    height: 83.699,
+    mask: tabletMask,
+  },
+  [DEVICE_SCREEN.PHONE]: {
+    left: 83.255,
+    top: 20.244,
+    width: 16.42,
+    height: 78.618,
+    mask: phoneMask,
+  },
+};
+
+const screen = (device: keyof typeof SCREENS) => {
+  const { left, top, width, height, mask } = SCREENS[device];
+  const shape = `url(${mask.src}) center / 100% 100% no-repeat`;
+  return `left:${left}%;top:${top}%;width:${width}%;height:${height}%;-webkit-mask:${shape};mask:${shape}`;
+};
+
+const { name, mockup } = Astro.props;
+const poster = await getImage({
+  src: mockup.laptop.poster,
+  width: 1360,
+  format: "webp",
+});
+---
+
+<div class="relative" data-device-mockup>
+  <video
+    class="absolute object-cover"
+    style={screen(DEVICE_SCREEN.LAPTOP)}
+    poster={poster.src}
+    muted
+    loop
+    playsinline
+    preload="none"
+    aria-label={`Demo ${name}`}
+  >
+    <source src={mockup.laptop.webm} type="video/webm" />
+    <source src={mockup.laptop.mp4} type="video/mp4" />
+  </video>
+  <Image
+    src={mockup.tablet}
+    alt=""
+    widths={[300, 600, 900]}
+    sizes="(min-width: 1024px) 285px, (min-width: 768px) 160px, 27vw"
+    class="absolute object-cover"
+    style={screen(DEVICE_SCREEN.TABLET)}
+  />
+  <Image
+    src={mockup.phone}
+    alt=""
+    widths={[200, 400, 600]}
+    sizes="(min-width: 1024px) 179px, (min-width: 768px) 100px, 17vw"
+    class="absolute object-cover"
+    style={screen(DEVICE_SCREEN.PHONE)}
+  />
+  <Image
+    src={frame}
+    alt={`Preview ${name}`}
+    widths={[800, 1200, 1600, 2200]}
+    sizes="(min-width: 1024px) 1088px, (min-width: 768px) 608px, calc(100vw - 64px)"
+    loading="eager"
+    class="pointer-events-none relative h-auto w-full"
+  />
+  <button
+    type="button"
+    class="absolute hidden cursor-pointer items-center justify-center"
+    style={screen(DEVICE_SCREEN.LAPTOP)}
+    aria-label={`Reproducir demo ${name}`}
+    data-play
+  >
+    <span class="rounded-full bg-black/60 p-4 text-white backdrop-blur-sm">
+      <Play class="h-6 w-6" />
+    </span>
+  </button>
+</div>
+
+<script>
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  document
+    .querySelectorAll<HTMLElement>("[data-device-mockup]")
+    .forEach((container) => {
+      const video = container.querySelector("video");
+      const play = container.querySelector<HTMLButtonElement>("[data-play]");
+
+      if (!video || !play) return;
+
+      const showPlay = (visible: boolean) => {
+        play.classList.toggle("hidden", !visible);
+        play.classList.toggle("flex", visible);
+      };
+
+      const start = () =>
+        video
+          .play()
+          .then(() => showPlay(false))
+          .catch(() => showPlay(true));
+
+      play.addEventListener("click", start);
+
+      if (reducedMotion.matches) {
+        showPlay(true);
+        return;
+      }
+
+      new IntersectionObserver(
+        ([entry]) => (entry.isIntersecting ? start() : video.pause()),
+        { threshold: 0.4 },
+      ).observe(container);
+    });
+</script>
