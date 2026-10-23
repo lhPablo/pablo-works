@@ -14,6 +14,7 @@ const { name, icon: Icon, color } = Astro.props;
   class="glow-item flex items-center justify-center p-4"
   style={`--brand-color: ${color}`}
   title={name}
+  aria-label={name}
 >
-  <Icon class="relative z-10 h-8 w-8" aria-label={name} />
+  <Icon class="relative z-10 h-8 w-8 pointer-events-none" aria-label={name} />
 </div>
