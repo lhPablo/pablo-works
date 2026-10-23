@@ -1,0 +1,16 @@
+---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+interface Props {
+  icon?: AstroComponentFactory;
+}
+
+const { icon: Icon } = Astro.props;
+---
+
+<span
+  class="flex justify-center items-center text-xs bg-accent text-foreground rounded-full py-1 px-4 gap-2 cursor-default select-none"
+>
+  {Icon && <Icon class="size-4" aria-hidden="true" />}
+  <slot />
+</span>
