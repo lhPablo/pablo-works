@@ -10,8 +10,6 @@ const translations = getTranslations(Astro.currentLocale);
 <h3>{translations["projects"]}</h3>
 
 <div class="p-8 flex flex-col gap-5">
-  <p>{translations["projectsParagraph"]}</p>
-
   <ul class="flex flex-col items-stretch gap-10">
     {
       PROJECTS.map((project) => (

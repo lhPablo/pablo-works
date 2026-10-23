@@ -1,6 +1,6 @@
 export default {
   heroGreeting: "Hola, soy {{name}}",
-  heroParagraph: "{{yearsOfExperience}} años de experiencia en desarrollo de software",
+  heroParagraph: "{{yearsOfExperience}} años creando software para el sector agroalimentario. Hoy lidero el backend de una plataforma que usan más de 400 empresas y automatizo el desarrollo con IA para que el equipo llegue más lejos.",
   profile: "Perfil",
   downloadCV: "Descargar CV",
   contact: "Contacto",
@@ -14,10 +14,39 @@ export default {
   projects: "Proyectos",
   experience: "Experiencia",
   skills: "Habilidades",
-  aboutMeParagraph: "Me especializo en construir productos <span class='text-accent'>full stack</span> robustos, con especial atención a que el backend y el frontend encajen bien entre sí. He ayudado a equipos de distintos tamaños a sacar adelante funcionalidades que <span class='text-accent'>llegaron a producción</span> y siguen usándose a diario, priorizando siempre que el código sea fácil de mantener por quien venga después. Trabajo bien en equipo, con <span class='text-accent'>revisiones de código honestas</span> y comunicación directa, y me adapto rápido a herramientas y formas de trabajar nuevas.",
-  projectsParagraph: "Aquí tienes algunos de los proyectos más relevantes en los que he trabajado, prueba1, prueba2, prueba3",
+  aboutMeParagraph: "Ingeniero de software en VisualNACert, una agtech cuya plataforma digitaliza más de 5M de hectáreas para más de 400 empresas agroalimentarias. He pasado del modelado de datos al <span class='text-accent'>liderazgo de equipo</span>: hoy lidero el backend y desarrollo la nueva plataforma, migrando un monolito legacy a <span class='text-accent'>servicios orientados a eventos</span>. Perfil full-stack, de React y Next.js al backend en Java, con experiencia en <span class='text-accent'>automatización del desarrollo con IA</span>.",
   visitWebsite: "Visitar web",
   code: "Código",
-  experienceParagraph: "Aquí tienes algunas de las experiencias más relevantes en las que he trabajado, prueba1, prueba2, prueba3",
-  skillsParagraph: "Aquí tienes algunas de las habilidades más relevantes en las que he trabajado, prueba1, prueba2, prueba3",
+  experienceParagraph: "Del modelado de datos al liderazgo técnico en VisualNACert.",
+  skillsParagraph: "Tecnologías con las que trabajo en frontend, backend, datos y DevOps.",
+  jobs: {
+    frontend: "Empecé en el equipo de cargas: configuración de clientes y modelado/carga de datos en PostgreSQL. Después, desarrollo y mantenimiento de la aplicación web de gestión agrícola (AngularJS, JavaScript, SASS).",
+    fullstack: "Amplié mi rol del frontend al backend desarrollando con Java, mejorando la aplicación con patrones de diseño para optimizar su estructura y eficiencia.",
+    leadFrontend: "Responsable técnico del equipo de frontend web (2 personas) en AngularJS. Propuse y arranqué una migración progresiva a React para modernizar el frontend reduciendo el riesgo del legacy.",
+    leadDeveloper: "Lidero el equipo de backend (4 personas) y superviso el de frontend (3 personas). Participo con el CTO en la migración del monolito a servicios orientados a eventos (Spring Boot, Kafka, Debezium, gRPC, Kubernetes), con varios servicios ya en producción. Para hacer el desarrollo más autónomo, diseñé un harness multiagente que lleva tareas de Jira hasta la MR con el framework interno, reduciendo una entidad CRUD de ~1 h a ~20 min.",
+  },
+  projectItems: {
+    songparty: {
+      name: "SongParty",
+      description: "Listas de canciones colaborativas para karaokes, bodas y fiestas. Compartes un QR, los invitados se unen sin registrarse y proponen canciones, y los cambios llegan a todos en tiempo real con Ably. Puedes bloquear la lista en modo lectura y reordenarla arrastrando.",
+    },
+    wedding: {
+      name: "Web de boda",
+      description: "Web a medida para la boda: información del evento, transporte y confirmación de asistencia. El acceso es por un código compartido por WhatsApp, sin cuentas ni registro: un filtro ligero pensado para invitados no técnicos, con dos niveles (con y sin acompañante), y las confirmaciones se guardan en Google Sheets mediante Apps Script, sin coste de infraestructura. Código de acceso: demo.",
+    },
+  },
+  traits: {
+    leadership: {
+      title: "Liderazgo",
+      description: "Lidero el equipo de backend (4 personas) y superviso el de frontend (3 personas), ambos con alta autonomía",
+    },
+    fullstack: {
+      title: "Full-stack",
+      description: "De React y Next.js al backend en Java, Spring Boot y Kafka, pasando por el modelado de datos en PostgreSQL",
+    },
+    initiative: {
+      title: "Iniciativa",
+      description: "Propuse y arranqué la migración del frontend a React. También creo herramientas internas con IA, como un copiloto para reuniones con clientes",
+    },
+  },
 };

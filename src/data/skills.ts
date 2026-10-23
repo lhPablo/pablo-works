@@ -1,6 +1,7 @@
 import ReactIcon from "@/components/icons/React.astro";
 import SpringBootIcon from "@/components/icons/SpringBoot.astro";
 import AstroIcon from "@components/icons/Astro.astro";
+import CodeIcon from "@components/icons/Code.astro";
 import CssIcon from "@components/icons/Css.astro";
 import HtmlIcon from "@components/icons/Html.astro";
 import JavaIcon from "@components/icons/Java.astro";
@@ -40,7 +41,7 @@ export const SKILLS = [
     color: "#BC52EE"
   },
   {
-    name: "NextJS",
+    name: "Next.js",
     icon: NextIcon,
     color: "#6b7280ff"
   },
@@ -53,6 +54,56 @@ export const SKILLS = [
     name: "Spring Boot",
     icon: SpringBootIcon,
     color: "#64bd45ff"
+  },
+  {
+    name: "Python",
+    icon: CodeIcon,
+    color: "#3776abff"
+  },
+  {
+    name: "SQL",
+    icon: CodeIcon,
+    color: "#6b7280ff"
+  },
+  {
+    name: "PostgreSQL",
+    icon: CodeIcon,
+    color: "#4169e1ff"
+  },
+  {
+    name: "Angular",
+    icon: CodeIcon,
+    color: "#dd0031ff"
+  },
+  {
+    name: "Tailwind",
+    icon: CodeIcon,
+    color: "#06b6d4ff"
+  },
+  {
+    name: "SASS",
+    icon: CodeIcon,
+    color: "#cc6699ff"
+  },
+  {
+    name: "Kafka",
+    icon: CodeIcon,
+    color: "#6b7280ff"
+  },
+  {
+    name: "gRPC",
+    icon: CodeIcon,
+    color: "#244c5aff"
+  },
+  {
+    name: "Kubernetes",
+    icon: CodeIcon,
+    color: "#326ce5ff"
+  },
+  {
+    name: "GitLab CI/CD",
+    icon: CodeIcon,
+    color: "#fc6d26ff"
   },
 ] as const;
 

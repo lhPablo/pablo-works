@@ -1,23 +1,30 @@
 export const EXPERIENCE = [
     {
+        id: "frontend",
         company: "VisualNACert S.L.",
-        from: new Date("2023-01-01"),
-        to: new Date("2024-01-01"),
+        from: new Date("2018-01-01"),
+        to: new Date("2019-08-31"),
         role: "Front-end Developer",
-        description: "Me ocupe de gestionar la web",
     },
     {
+        id: "fullstack",
         company: "VisualNACert S.L.",
-        from: new Date("2024-01-01"),
-        to: new Date("2025-01-01"),
-        role: "Back-end Developer",
-        description: "Me ocupe de gestionar el servidor",
+        from: new Date("2019-09-01"),
+        to: new Date("2022-04-01"),
+        role: "Full-stack Developer",
     },
     {
+        id: "leadFrontend",
         company: "VisualNACert S.L.",
-        from: new Date("2025-01-01"),
+        from: new Date("2022-04-01"),
+        to: new Date("2024-10-01"),
+        role: "Lead Front-end",
+    },
+    {
+        id: "leadDeveloper",
+        company: "VisualNACert S.L.",
+        from: new Date("2024-10-01"),
         to: new Date(),
-        role: "Full Stack Developer",
-        description: "Me ocupe de llevar ambas cosas",
+        role: "Lead Developer",
     }
-]
+] as const;

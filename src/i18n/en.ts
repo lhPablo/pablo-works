@@ -1,7 +1,7 @@
 
 export default {
   heroGreeting: "Hello, I'm {{name}}",
-  heroParagraph: "{{yearsOfExperience}} years of experience in software development",
+  heroParagraph: "{{yearsOfExperience}} years building software for the agrifood industry. I now lead the backend of a platform used by 400+ companies and use AI to automate development so the team can go further.",
   profile: "Profile",
   downloadCV: "Download CV",
   contact: "Contact",
@@ -15,10 +15,39 @@ export default {
   projects: "Projects",
   experience: "Experience",
   skills: "Skills",
-  aboutMeParagraph: "I specialize in building robust <span class='text-accent'>full stack</span> products, paying close attention to how the backend and frontend fit together. I've helped teams of different sizes ship features that <span class='text-accent'>made it to production</span> and are still used daily, always prioritizing code that's easy for the next person to maintain. I work well in a team, with <span class='text-accent'>honest code reviews</span> and direct communication, and I adapt quickly to new tools and ways of working.",
-  projectsParagraph: "Here are some of the most relevant projects I have worked on, prueba1, prueba2, prueba3",
+  aboutMeParagraph: "Software engineer at VisualNACert, an agtech whose platform digitizes 5M+ hectares for 400+ agrifood companies. I have grown from data modeling to <span class='text-accent'>team leadership</span>: I now lead the backend team and build the new platform, migrating a legacy monolith to <span class='text-accent'>event-driven services</span>. A full-stack profile, from React and Next.js to Java on the back end, experienced in <span class='text-accent'>AI-assisted development automation</span>.",
   visitWebsite: "Visit website",
   code: "Code",
-  experienceParagraph: "Here are some of the most relevant experiences I have worked on, prueba1, prueba2, prueba3",
-  skillsParagraph: "Here are some of the most relevant skills I have worked on, prueba1, prueba2, prueba3"
+  experienceParagraph: "From data modeling to technical leadership at VisualNACert.",
+  skillsParagraph: "Technologies I work with across frontend, backend, data and DevOps.",
+  jobs: {
+    frontend: "Started on the data-loading team: client setup and data modeling/loading in PostgreSQL. Then developed and maintained the agricultural-management web application (AngularJS, JavaScript, SASS).",
+    fullstack: "Expanded my role from frontend to backend, developing in Java and improving the application with design patterns to optimize its structure and efficiency.",
+    leadFrontend: "Technical lead of the web frontend team (2 people) on AngularJS. Proposed and kicked off a progressive migration to React to modernize the frontend while reducing legacy risk.",
+    leadDeveloper: "I lead the backend team (4 people) and oversee the frontend team (3 people). Working with the CTO on migrating the monolith to event-driven services (Spring Boot, Kafka, Debezium, gRPC, Kubernetes), with several services already in production. To make development more autonomous, designed a multi-agent harness that takes Jira tasks to merge requests with our internal framework, cutting a CRUD entity from ~1 h to ~20 min.",
+  },
+  projectItems: {
+    songparty: {
+      name: "SongParty",
+      description: "Collaborative song lists for karaokes, weddings and parties. Share a QR code, guests join without signing up and suggest songs, and every change reaches everyone in real time with Ably. Lock the list in read-only mode and reorder it by drag and drop.",
+    },
+    wedding: {
+      name: "Wedding website",
+      description: "Custom wedding website: event details, transport and RSVP. Access is by a code shared over WhatsApp, with no accounts or sign-up: a lightweight gate designed for non-technical guests, with two levels (with or without a plus-one), and RSVPs are stored in Google Sheets through Apps Script at zero infrastructure cost. Access code: demo.",
+    },
+  },
+  traits: {
+    leadership: {
+      title: "Leadership",
+      description: "I lead the backend team (4 people) and oversee the frontend team (3 people), both highly autonomous",
+    },
+    fullstack: {
+      title: "Full-stack",
+      description: "From React and Next.js to Java, Spring Boot and Kafka on the back end, including data modeling in PostgreSQL",
+    },
+    initiative: {
+      title: "Initiative",
+      description: "Proposed and kicked off the frontend migration to React. I also build internal AI tools, like a copilot for client meetings",
+    },
+  },
 };

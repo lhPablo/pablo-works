@@ -20,7 +20,10 @@ const translations = getTranslations(Astro.currentLocale);
     {
       TRAITS.map((trait) => (
         <li>
-          <TraitCard title={trait.title} description={trait.description} />
+          <TraitCard
+            title={translations.traits[trait].title}
+            description={translations.traits[trait].description}
+          />
         </li>
       ))
     }

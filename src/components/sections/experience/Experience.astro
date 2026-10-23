@@ -16,7 +16,7 @@ const translations = getTranslations(Astro.currentLocale);
           from={exp.from}
           to={exp.to}
           role={exp.role}
-          description={exp.description}
+          description={translations.jobs[exp.id]}
         />
       </li>
     ))

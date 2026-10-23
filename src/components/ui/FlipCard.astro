@@ -7,18 +7,18 @@ interface Props {
 const { class: className, faceClass } = Astro.props;
 ---
 
-<div class="group perspective-distant">
+<div class="group h-full perspective-distant">
   <div
     class:list={[
-      "relative transition-transform duration-500 motion-reduce:transition-none transform-3d group-hover:rotate-y-180",
+      "grid h-full transition-transform duration-500 motion-reduce:transition-none transform-3d group-hover:rotate-y-180",
       className,
     ]}
   >
-    <div class:list={["absolute inset-0 backface-hidden", faceClass]}>
+    <div class:list={["[grid-area:1/1] backface-hidden", faceClass]}>
       <slot name="front" />
     </div>
 
-    <div class:list={["absolute inset-0 backface-hidden rotate-y-180", faceClass]}>
+    <div class:list={["[grid-area:1/1] backface-hidden rotate-y-180", faceClass]}>
       <slot name="back" />
     </div>
   </div>
