@@ -15,6 +15,34 @@
     0 10px 15px -3px #0000001a,
     0 4px 6px -4px #0000001a;
   --spacing-header: 5rem;
+
+  --animate-shimmer: shimmer 3s linear infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 15% 15%;
+    }
+
+    to {
+      background-position: 85% 85%;
+    }
+  }
+
+  --animate-nav-appear: nav-appear 1s linear both;
+
+  @keyframes nav-appear {
+    from {
+      box-shadow: none;
+      backdrop-filter: none;
+      background-color: var(--color-background);
+    }
+
+    to {
+      box-shadow: var(--shadow-nav);
+      backdrop-filter: blur(12px);
+      background-color: var(--color-nav);
+    }
+  }
 }
 
 @layer base {
@@ -22,7 +50,7 @@
     --color-primary: #58a6ff;
     --color-secondary: #7ee787;
     --color-accent: #f778ba;
-    
+
     --color-background: #0d1117;
     --color-surface: #161b22;
     --color-foreground: #c9d1d9;
@@ -34,7 +62,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    @apply scroll-smooth;
   }
 
   body {
@@ -64,56 +92,47 @@
   }
 }
 
-@utility nav-link {
-  &.active {
-    @apply text-accent bg-accent/10;
+@utility frosted-on-scroll {
+  @apply backdrop-blur-md bg-nav shadow-(--shadow-nav);
+
+  @supports (animation-timeline: scroll()) {
+    @apply animate-nav-appear;
+    animation-timeline: scroll(root block);
+    animation-range: 0 100px;
   }
 }
 
-@utility historic-items {
-  position: relative;
-  isolation: isolate;
+@utility timeline {
+  --timeline-x: --spacing(-5);
+  @apply relative isolate;
 
   &::before {
     content: "";
-    position: absolute;
-    z-index: -2;
-    @apply top-0 -left-5 w-0.5 h-full rounded-xl bg-foreground/80 -translate-x-1/2;
+    @apply absolute -z-2 top-0 left-(--timeline-x) w-0.5 h-full rounded-xl bg-foreground/80 -translate-x-1/2;
   }
 }
 
-@utility historic-item {
-  --dot-x: --spacing(-5);
-  position: relative;
+@utility timeline-dot {
+  @apply relative;
 
   &::before {
     content: "";
-    position: absolute;
-    left: var(--dot-x);
-    z-index: -1;
-    @apply top-1/2 size-3 rounded-full bg-accent -translate-x-1/2 -translate-y-1/2;
+    @apply absolute -z-1 top-1/2 left-(--timeline-x) size-3 rounded-full bg-accent -translate-1/2;
   }
 
   &:last-child::after {
     content: "";
-    position: absolute;
-    left: var(--dot-x);
-    z-index: -1;
-    @apply top-1/2 size-5 rounded-full bg-accent/50 -translate-x-1/2 -translate-y-1/2 animate-ping;
+    @apply absolute -z-1 top-1/2 left-(--timeline-x) size-5 rounded-full bg-accent/50 -translate-1/2 animate-ping;
   }
 }
 
-@utility glow-item {
-  position: relative;
-  isolation: isolate;
+@utility glow {
+  @apply relative isolate;
 
   &::after {
     content: "";
-    position: absolute;
-    z-index: -2;
-    @apply top-1/2 left-1/2 size-2.5 rounded-full -translate-x-1/2 -translate-y-1/2;
+    @apply absolute -z-2 top-1/2 left-1/2 size-2.5 rounded-full -translate-1/2 transition-shadow duration-700;
     box-shadow: 0 0 2.1875rem 0.5rem var(--brand-color);
-    transition: box-shadow 0.7s ease;
   }
 
   &:hover::after {
@@ -122,21 +141,15 @@
 
   &::before {
     content: "";
-    position: absolute;
-    z-index: -1;
-    @apply inset-0 rounded-xl border border-transparent backdrop-blur-xl;
-    transition:
-      border-color 0.7s ease,
-      backdrop-filter 0.7s ease;
+    @apply absolute -z-1 inset-0 rounded-xl border border-transparent backdrop-blur-xl transition-[border-color,backdrop-filter] duration-700;
   }
 
   &:hover::before {
-    @apply backdrop-blur-lg;
-    border-color: var(--brand-color);
+    @apply backdrop-blur-lg border-(--brand-color);
   }
 }
 
-@utility shimmer-link {
+@utility shimmer {
   --shimmer-opacity: 0;
   --shimmer-thickness: 1px;
   --shimmer-offset: 1px;
@@ -165,22 +178,17 @@
   &::before,
   &::after {
     content: "";
-    @apply pointer-events-none absolute;
-    opacity: var(--shimmer-opacity);
+    @apply pointer-events-none absolute opacity-(--shimmer-opacity) animate-shimmer motion-reduce:animate-none transition-opacity duration-200 ease-[cubic-bezier(0.22,0.61,0.36,1)];
     background: var(--shimmer-gradient) 15% 15% / 300% 300%;
-    animation: shimmer 3s linear infinite;
-    transition: opacity 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
   &::before {
-    inset: 0;
-    z-index: -1;
-    filter: blur(12px);
+    @apply inset-0 -z-1 blur-md -translate-z-px;
   }
 
   &::after {
+    @apply p-(--shimmer-thickness);
     inset: calc(-1 * (var(--shimmer-offset) + var(--shimmer-thickness)) + 1px);
-    padding: var(--shimmer-thickness);
     border-radius: calc(0.75rem + var(--shimmer-offset) + var(--shimmer-thickness));
 
     -webkit-mask:
@@ -197,60 +205,5 @@
   &:hover,
   &:focus-within {
     --shimmer-opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    &::before,
-    &::after {
-      animation: none;
-    }
-  }
-}
-
-@layer components {
-  .card {
-    @apply flex flex-col border-2 border-white/10 bg-white/5 p-4 rounded-xl shadow-lg;
-  }
-
-  .btn-primary {
-    @apply px-4 py-2 rounded bg-primary text-foreground hover:bg-secondary;
-  }
-
-  .header-nav {
-    @apply backdrop-blur-md;
-    background-color: var(--color-nav);
-    box-shadow: var(--shadow-nav);
-  }
-
-  @supports (animation-timeline: scroll()) {
-    .header-nav {
-      animation: nav-appear 1s linear both;
-      animation-timeline: scroll(root block);
-      animation-range: 0 100px;
-    }
-  }
-}
-
-@keyframes nav-appear {
-  from {
-    box-shadow: none;
-    backdrop-filter: none;
-    background-color: var(--color-background);
-  }
-
-  to {
-    box-shadow: var(--shadow-nav);
-    backdrop-filter: blur(12px);
-    background-color: var(--color-nav);
-  }
-}
-
-@keyframes shimmer {
-  from {
-    background-position: 15% 15%;
-  }
-
-  to {
-    background-position: 85% 85%;
   }
 }

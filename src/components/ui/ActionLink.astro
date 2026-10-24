@@ -11,7 +11,7 @@ interface Props extends HTMLAttributes<"a"> {
 const { icon: Icon, iconClass, ...attrs } = Astro.props;
 ---
 
-<div class="shimmer-link hover:scale-110 transition-transform duration-200">
+<div class="shimmer hover:scale-110 transition-transform duration-200">
   <a
     class="bg-background border rounded-xl p-2 hover:text-accent transition-colors duration-200 focus-ring"
     {...attrs}

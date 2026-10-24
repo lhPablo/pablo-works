@@ -1,4 +1,6 @@
 ---
+import Card from "@components/ui/Card.astro";
+
 interface Props {
   company: string;
   from: Date;
@@ -10,8 +12,8 @@ interface Props {
 const { company, from, to, role, description } = Astro.props;
 ---
 
-<div
-  class="card hover:bg-white/10 hover:-translate-y-1 transition-all duration-300"
+<Card
+  class="hover:bg-white/10 hover:-translate-y-1 transition-all duration-300"
 >
   <h3 class="text-xl font-semibold mb-2">{company}</h3>
   <p class="text-sm text-muted">{role}</p>
@@ -33,4 +35,4 @@ const { company, from, to, role, description } = Astro.props;
     }
   </p>
   <p class="mt-2">{description}</p>
-</div>
+</Card>
