@@ -72,6 +72,7 @@
 
 @utility historic-items {
   position: relative;
+  isolation: isolate;
 
   &::before {
     content: "";
@@ -104,6 +105,7 @@
 
 @utility glow-item {
   position: relative;
+  isolation: isolate;
 
   &::after {
     content: "";
@@ -131,6 +133,77 @@
   &:hover::before {
     @apply backdrop-blur-lg;
     border-color: var(--brand-color);
+  }
+}
+
+@utility shimmer-link {
+  --shimmer-opacity: 0;
+  --shimmer-thickness: 1px;
+  --shimmer-offset: 1px;
+
+  --shimmer-gradient: linear-gradient(
+    160deg,
+    transparent 0%,
+    white 15%,
+    #d8b4fe 20%,
+    #f0abfc 25%,
+    #fdba74 30%,
+    transparent 36%,
+    transparent 40%,
+    white 55%,
+    #d8b4fe 60%,
+    #f0abfc 65%,
+    #fdba74 70%,
+    transparent 76%,
+    transparent 80%,
+    white 95%,
+    #d8b4fe 100%
+  );
+
+  @apply relative inline-flex isolate rounded-xl;
+
+  &::before,
+  &::after {
+    content: "";
+    @apply pointer-events-none absolute;
+    opacity: var(--shimmer-opacity);
+    background: var(--shimmer-gradient) 15% 15% / 300% 300%;
+    animation: shimmer 3s linear infinite;
+    transition: opacity 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  &::before {
+    inset: 0;
+    z-index: -1;
+    filter: blur(12px);
+  }
+
+  &::after {
+    inset: calc(-1 * (var(--shimmer-offset) + var(--shimmer-thickness)) + 1px);
+    padding: var(--shimmer-thickness);
+    border-radius: calc(0.75rem + var(--shimmer-offset) + var(--shimmer-thickness));
+
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+
+  &:hover,
+  &:focus-within {
+    --shimmer-opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before,
+    &::after {
+      animation: none;
+    }
   }
 }
 
@@ -169,5 +242,15 @@
     box-shadow: var(--shadow-nav);
     backdrop-filter: blur(12px);
     background-color: var(--color-nav);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 15% 15%;
+  }
+
+  to {
+    background-position: 85% 85%;
   }
 }
