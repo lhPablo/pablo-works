@@ -7,10 +7,16 @@ interface Props {
 const { class: className, faceClass } = Astro.props;
 ---
 
-<div class="group h-full perspective-distant">
+<div
+  class="group h-full rounded-xl perspective-distant focus-ring"
+  role="button"
+  tabindex="0"
+  aria-pressed="false"
+  data-flip-card
+>
   <div
     class:list={[
-      "grid h-full transition-transform duration-500 motion-reduce:transition-none transform-3d group-hover:rotate-y-180",
+      "grid h-full transition-transform duration-500 motion-reduce:transition-none transform-3d group-data-hover:rotate-y-180 group-aria-pressed:rotate-y-180",
       className,
     ]}
   >
@@ -18,8 +24,43 @@ const { class: className, faceClass } = Astro.props;
       <slot name="front" />
     </div>
 
-    <div class:list={["[grid-area:1/1] backface-hidden rotate-y-180", faceClass]}>
+    <div
+      class:list={["[grid-area:1/1] backface-hidden rotate-y-180", faceClass]}
+    >
       <slot name="back" />
     </div>
   </div>
 </div>
+
+<script>
+  // Mouse flips on hover; touch and keyboard toggle each card.
+  // Uses the event's pointer type: (hover: hover) is unreliable on some touch devices.
+  document.querySelectorAll<HTMLElement>("[data-flip-card]").forEach((card) => {
+    let pointerType = "mouse";
+
+    const toggle = () =>
+      card.setAttribute("aria-pressed", String(card.ariaPressed !== "true"));
+
+    card.addEventListener("pointerdown", (event) => {
+      pointerType = event.pointerType;
+    });
+
+    card.addEventListener("pointerenter", (event) => {
+      if (event.pointerType === "mouse") card.dataset.hover = "";
+    });
+
+    card.addEventListener("pointerleave", () => {
+      delete card.dataset.hover;
+    });
+
+    card.addEventListener("click", () => {
+      if (pointerType !== "mouse") toggle();
+    });
+
+    card.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      toggle();
+    });
+  });
+</script>

@@ -1,19 +1,18 @@
 ---
 import TraitCard from "@components/sections/about/TraitCard.astro";
+import SectionTitle from "@components/ui/SectionTitle.astro";
 import { TRAITS } from "@data/traits";
 import { getTranslations } from "@lib/i18n";
 
 const translations = getTranslations(Astro.currentLocale);
 ---
 
-<h3>
-  {translations["about"]}
-</h3>
+<SectionTitle title={translations.about} />
 
-<div class="p-8 flex flex-col gap-5">
+<div class="py-8 sm:px-8 flex flex-col gap-8">
   <p
     class="text-md text-foreground/80 leading-relaxed"
-    set:html={translations["aboutMeParagraph"]}
+    set:html={translations.aboutMeParagraph}
   />
 
   <ul class="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -21,8 +20,10 @@ const translations = getTranslations(Astro.currentLocale);
       TRAITS.map((trait) => (
         <li>
           <TraitCard
-            title={translations.traits[trait].title}
-            description={translations.traits[trait].description}
+            title={translations.traits[trait.id].title}
+            description={translations.traits[trait.id].description}
+            icon={trait.icon}
+            color={trait.color}
           />
         </li>
       ))

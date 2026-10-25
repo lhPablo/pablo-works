@@ -1,4 +1,5 @@
 ---
+import SectionTitle from "@components/ui/SectionTitle.astro";
 import { PROJECTS } from "@data/projects";
 import { getTranslations } from "@lib/i18n";
 
@@ -7,9 +8,9 @@ import ProjectInfo from "./ProjectInfo.astro";
 const translations = getTranslations(Astro.currentLocale);
 ---
 
-<h3>{translations["projects"]}</h3>
+<SectionTitle title={translations.projects} />
 
-<div class="p-8 flex flex-col gap-5">
+<div class="py-8 sm:px-8 flex flex-col gap-5">
   <ul class="flex flex-col items-stretch gap-10">
     {
       PROJECTS.map((project) => (

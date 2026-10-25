@@ -12,6 +12,7 @@ export interface Project {
   url: string;
   repo: string;
   technologies: SkillName[];
+  color: string;
   mockup: ProjectMockup;
 }
 
@@ -19,12 +20,14 @@ const PROJECT_DATA = {
   songparty: {
     url: "https://songparty.net",
     repo: "https://gitlab.com/lhPablo",
-    technologies: ["Next.js", "React", "Tailwind", "TypeScript"]
+    technologies: ["Next.js", "React", "Tailwind", "TypeScript"],
+    color: "#ec4899"
   },
   wedding: {
     url: "https://paulaypablosecasan.com",
     repo: "https://gitlab.com/lhPablo",
-    technologies: ["Astro", "TypeScript", "CSS"]
+    technologies: ["Astro", "TypeScript", "CSS"],
+    color: "#7b93c9"
   },
 } satisfies Record<string, Omit<Project, "id" | "mockup">>;
 

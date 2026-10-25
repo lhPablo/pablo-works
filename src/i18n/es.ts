@@ -14,16 +14,17 @@ export default {
   projects: "Proyectos",
   experience: "Experiencia",
   skills: "Habilidades",
-  aboutMeParagraph: "Ingeniero de software en VisualNACert, una agtech cuya plataforma digitaliza más de 5M de hectáreas para más de 400 empresas agroalimentarias. He pasado del modelado de datos al <span class='text-accent'>liderazgo de equipo</span>: hoy lidero el backend y desarrollo la nueva plataforma, migrando un monolito legacy a <span class='text-accent'>servicios orientados a eventos</span>. Perfil full-stack, de React y Next.js al backend en Java, con experiencia en <span class='text-accent'>automatización del desarrollo con IA</span>.",
+  aboutMeParagraph: "Ingeniero de software en VisualNACert, una agtech cuya plataforma digitaliza más de 5M de hectáreas para más de 400 empresas agroalimentarias. He pasado del modelado de datos al <span class='font-semibold text-foreground'>liderazgo de equipo</span>: hoy lidero el backend y desarrollo la nueva plataforma, migrando un monolito legacy a <span class='font-semibold text-foreground'>servicios orientados a eventos</span>. Perfil full-stack, de React y Next.js al backend en Java, con experiencia en <span class='font-semibold text-foreground'>automatización del desarrollo con IA</span>.",
   visitWebsite: "Visitar web",
   code: "Código",
+  present: "Actualidad",
   experienceParagraph: "Del modelado de datos al liderazgo técnico en VisualNACert.",
   skillsParagraph: "Tecnologías con las que trabajo en frontend, backend, datos y DevOps.",
   jobs: {
     frontend: "Empecé en el equipo de cargas: configuración de clientes y modelado/carga de datos en PostgreSQL. Después, desarrollo y mantenimiento de la aplicación web de gestión agrícola (AngularJS, JavaScript, SASS).",
     fullstack: "Amplié mi rol del frontend al backend desarrollando con Java, mejorando la aplicación con patrones de diseño para optimizar su estructura y eficiencia.",
     leadFrontend: "Responsable técnico del equipo de frontend web (2 personas) en AngularJS. Propuse y arranqué una migración progresiva a React para modernizar el frontend reduciendo el riesgo del legacy.",
-    leadDeveloper: "Lidero el equipo de backend (4 personas) y superviso el de frontend (3 personas). Participo con el CTO en la migración del monolito a servicios orientados a eventos (Spring Boot, Kafka, Debezium, gRPC, Kubernetes), con varios servicios ya en producción. Para hacer el desarrollo más autónomo, diseñé un harness multiagente que lleva tareas de Jira hasta la MR con el framework interno, reduciendo una entidad CRUD de ~1 h a ~20 min.",
+    leadDeveloper: "Lidero el equipo de backend (4 personas) y superviso el de frontend (3 personas). Participo con el CTO en la migración del monolito a servicios orientados a eventos (Spring Boot, Kafka, Debezium, gRPC, EKS), con varios servicios ya en producción. Para hacer el desarrollo más autónomo, diseñé un harness multiagente que lleva tareas de Jira hasta la MR con el framework interno.",
   },
   projectItems: {
     songparty: {
@@ -46,7 +47,7 @@ export default {
     },
     initiative: {
       title: "Iniciativa",
-      description: "Propuse y arranqué la migración del frontend a React. También creo herramientas internas con IA, como un copiloto para reuniones con clientes",
+      description: "Propuse y arranqué la migración del frontend a React. También creé herramientas internas con IA, como un copiloto para reuniones con clientes",
     },
   },
 };

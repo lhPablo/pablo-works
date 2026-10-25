@@ -15,16 +15,17 @@ export default {
   projects: "Projects",
   experience: "Experience",
   skills: "Skills",
-  aboutMeParagraph: "Software engineer at VisualNACert, an agtech whose platform digitizes 5M+ hectares for 400+ agrifood companies. I have grown from data modeling to <span class='text-accent'>team leadership</span>: I now lead the backend team and build the new platform, migrating a legacy monolith to <span class='text-accent'>event-driven services</span>. A full-stack profile, from React and Next.js to Java on the back end, experienced in <span class='text-accent'>AI-assisted development automation</span>.",
+  aboutMeParagraph: "Software engineer at VisualNACert, an agtech whose platform digitizes 5M+ hectares for 400+ agrifood companies. I have grown from data modeling to <span class='font-semibold text-foreground'>team leadership</span>: I now lead the backend team and build the new platform, migrating a legacy monolith to <span class='font-semibold text-foreground'>event-driven services</span>. A full-stack profile, from React and Next.js to Java on the back end, experienced in <span class='font-semibold text-foreground'>AI-assisted development automation</span>.",
   visitWebsite: "Visit website",
   code: "Code",
+  present: "Present",
   experienceParagraph: "From data modeling to technical leadership at VisualNACert.",
   skillsParagraph: "Technologies I work with across frontend, backend, data and DevOps.",
   jobs: {
     frontend: "Started on the data-loading team: client setup and data modeling/loading in PostgreSQL. Then developed and maintained the agricultural-management web application (AngularJS, JavaScript, SASS).",
     fullstack: "Expanded my role from frontend to backend, developing in Java and improving the application with design patterns to optimize its structure and efficiency.",
     leadFrontend: "Technical lead of the web frontend team (2 people) on AngularJS. Proposed and kicked off a progressive migration to React to modernize the frontend while reducing legacy risk.",
-    leadDeveloper: "I lead the backend team (4 people) and oversee the frontend team (3 people). Working with the CTO on migrating the monolith to event-driven services (Spring Boot, Kafka, Debezium, gRPC, Kubernetes), with several services already in production. To make development more autonomous, designed a multi-agent harness that takes Jira tasks to merge requests with our internal framework, cutting a CRUD entity from ~1 h to ~20 min.",
+    leadDeveloper: "I lead the backend team (4 people) and oversee the frontend team (3 people). Working with the CTO on migrating the monolith to event-driven services (Spring Boot, Kafka, Debezium, gRPC, EKS), with several services already in production. To make development more autonomous, designed a multi-agent harness that takes Jira tasks to merge requests with our internal framework.",
   },
   projectItems: {
     songparty: {
@@ -47,7 +48,7 @@ export default {
     },
     initiative: {
       title: "Initiative",
-      description: "Proposed and kicked off the frontend migration to React. I also build internal AI tools, like a copilot for client meetings",
+      description: "Proposed and kicked off the frontend migration to React. I also created internal AI tools, like a copilot for client meetings",
     },
   },
 };

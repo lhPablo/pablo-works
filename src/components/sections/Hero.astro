@@ -24,16 +24,16 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
 
 <section
   id="home"
-  class="w-full min-h-svh pt-header flex flex-col-reverse gap-15 items-center justify-center lg:max-w-4xl md:max-w-2xl sm:flex-row"
+  class="w-full min-h-svh px-4 pt-header flex flex-col-reverse gap-15 items-center justify-center lg:max-w-4xl md:max-w-2xl sm:flex-row"
 >
   <div class="flex flex-col gap-5 items-start justify-start">
     <header class="flex flex-col gap-2 items-start justify-start">
       <h1>
         {splitName.before}
-        <span class="text-accent">{PROFILE.name}</span>
+        <span class="text-gradient">{PROFILE.name}</span>
         {splitName.after}
       </h1>
-      <h2 class="text-accent">{PROFILE.role}</h2>
+      <p class="font-mono text-lg text-muted">{PROFILE.role}</p>
     </header>
     <p>
       {splitYears.before}{yearsOfExperience()}{splitYears.after}
@@ -68,14 +68,16 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
     </nav>
   </div>
 
-  <div class="flex">
+  <div
+    class="flex shrink-0 rounded-2xl p-0.5 bg-linear-to-br from-accent-2 via-accent to-accent-3 shadow-[0_0_3rem_-0.75rem_var(--color-accent)]"
+  >
     <Image
       src={PROFILE.image}
       alt={translations.profile}
       width={256}
       height={256}
       priority={true}
-      class="short:size-40"
+      class="rounded-[0.875rem] short:size-40"
     />
   </div>
 </section>

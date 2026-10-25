@@ -9,3 +9,8 @@ export function yearsOfExperience(from = PROFILE.careerStart, to = new Date()) {
 
     return before ? years - 1 : years;
 }
+export function formatPeriod(from: Date, to: Date | null, locale: string, present: string) {
+    const format = new Intl.DateTimeFormat(locale, { month: "short", year: "numeric", timeZone: "UTC" });
+
+    return `${format.format(from)} — ${to ? format.format(to) : present}`;
+}

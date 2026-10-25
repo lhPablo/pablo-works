@@ -2,15 +2,19 @@
 @variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-  --color-primary: #2563eb;
-  --color-secondary: #10b981;
-  --color-accent: #f59e0b;
+  --color-accent: #c026d3;
+  --color-accent-2: #7c3aed;
+  --color-accent-3: #ea580c;
+  --color-highlight: #e879f9;
 
-  --color-background: #f7f9fc;
+  --color-background: #f8f7fb;
   --color-surface: #ffffff;
-  --color-foreground: #1f2937;
+  --color-foreground: #1e1b2e;
+  --color-muted: #5b5870;
+  --color-border: #1e1b2e1f;
 
-  --color-nav: #ffffffe6;
+  --color-nav: #ffffffd9;
+  --ambient-strength: 16%;
   --shadow-nav:
     0 10px 15px -3px #0000001a,
     0 4px 6px -4px #0000001a;
@@ -47,15 +51,19 @@
 
 @layer base {
   :root[data-theme="dark"] {
-    --color-primary: #58a6ff;
-    --color-secondary: #7ee787;
-    --color-accent: #f778ba;
+    --color-accent: #f0abfc;
+    --color-accent-2: #d8b4fe;
+    --color-accent-3: #fdba74;
+    --color-highlight: #ffffff;
 
-    --color-background: #0d1117;
-    --color-surface: #161b22;
-    --color-foreground: #c9d1d9;
+    --color-background: #0c0d12;
+    --color-surface: #15161e;
+    --color-foreground: #d6d8e1;
+    --color-muted: #8d90a3;
+    --color-border: #ffffff1a;
 
-    --color-nav: #21262de6;
+    --color-nav: #1a1b24e6;
+    --ambient-strength: 11%;
     --shadow-nav:
       0 8px 24px -6px #00000073,
       0 4px 8px -4px #0000004d;
@@ -70,19 +78,19 @@
   }
 
   h1 {
-    @apply text-4xl font-bold;
+    @apply text-4xl sm:text-5xl font-bold tracking-tight;
   }
 
   h2 {
-    @apply text-2xl font-semibold;
+    @apply text-3xl font-semibold tracking-tight;
   }
 
   h3 {
-    @apply text-sm tracking-widest text-accent uppercase my-1;
+    @apply text-xl font-semibold tracking-tight;
   }
 
   h4 {
-    @apply text-accent font-mono;
+    @apply font-semibold;
   }
 }
 
@@ -108,7 +116,7 @@
 
   &::before {
     content: "";
-    @apply absolute -z-2 top-0 left-(--timeline-x) w-0.5 h-full rounded-xl bg-foreground/80 -translate-x-1/2;
+    @apply absolute -z-2 top-0 left-(--timeline-x) w-0.5 h-full rounded-xl bg-linear-to-b from-accent via-accent-2 to-accent-3/0 -translate-x-1/2;
   }
 }
 
@@ -120,7 +128,7 @@
     @apply absolute -z-1 top-1/2 left-(--timeline-x) size-3 rounded-full bg-accent -translate-1/2;
   }
 
-  &:last-child::after {
+  &:first-child::after {
     content: "";
     @apply absolute -z-1 top-1/2 left-(--timeline-x) size-5 rounded-full bg-accent/50 -translate-1/2 animate-ping;
   }
@@ -132,11 +140,11 @@
   &::after {
     content: "";
     @apply absolute -z-2 top-1/2 left-1/2 size-2.5 rounded-full -translate-1/2 transition-shadow duration-700;
-    box-shadow: 0 0 2.1875rem 0.5rem var(--brand-color);
+    box-shadow: 0 0 2.1875rem 0.5rem var(--glow-color);
   }
 
   &:hover::after {
-    box-shadow: 0 0 2.1875rem 0.9375rem var(--brand-color);
+    box-shadow: 0 0 2.1875rem 0.9375rem var(--glow-color);
   }
 
   &::before {
@@ -145,7 +153,7 @@
   }
 
   &:hover::before {
-    @apply backdrop-blur-lg border-(--brand-color);
+    @apply backdrop-blur-lg border-(--glow-color);
   }
 }
 
@@ -153,27 +161,28 @@
   --shimmer-opacity: 0;
   --shimmer-thickness: 1px;
   --shimmer-offset: 1px;
+  --shimmer-radius: 0.75rem;
 
   --shimmer-gradient: linear-gradient(
     160deg,
     transparent 0%,
-    white 15%,
-    #d8b4fe 20%,
-    #f0abfc 25%,
-    #fdba74 30%,
+    var(--color-highlight) 15%,
+    var(--color-accent-2) 20%,
+    var(--color-accent) 25%,
+    var(--color-accent-3) 30%,
     transparent 36%,
     transparent 40%,
-    white 55%,
-    #d8b4fe 60%,
-    #f0abfc 65%,
-    #fdba74 70%,
+    var(--color-highlight) 55%,
+    var(--color-accent-2) 60%,
+    var(--color-accent) 65%,
+    var(--color-accent-3) 70%,
     transparent 76%,
     transparent 80%,
-    white 95%,
-    #d8b4fe 100%
+    var(--color-highlight) 95%,
+    var(--color-accent-2) 100%
   );
 
-  @apply relative inline-flex isolate rounded-xl;
+  @apply relative inline-flex isolate rounded-(--shimmer-radius);
 
   &::before,
   &::after {
@@ -183,13 +192,13 @@
   }
 
   &::before {
-    @apply inset-0 -z-1 blur-md -translate-z-px;
+    @apply inset-0 -z-1 rounded-[inherit] blur-md -translate-z-px;
   }
 
   &::after {
     @apply p-(--shimmer-thickness);
     inset: calc(-1 * (var(--shimmer-offset) + var(--shimmer-thickness)) + 1px);
-    border-radius: calc(0.75rem + var(--shimmer-offset) + var(--shimmer-thickness));
+    border-radius: calc(var(--shimmer-radius) + var(--shimmer-offset) + var(--shimmer-thickness));
 
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -205,5 +214,48 @@
   &:hover,
   &:focus-within {
     --shimmer-opacity: 1;
+  }
+}
+
+@utility glass {
+  --glow-color: var(--color-accent);
+  @apply relative isolate rounded-xl border border-border bg-surface/60 shadow-sm backdrop-blur-xl transition-[border-color,box-shadow,translate] duration-500 dark:shadow-none;
+
+  /* Flip card faces rotate under a still pointer, so hover is tracked on the card itself */
+  &:hover,
+  [data-flip-card]:hover & {
+    border-color: color-mix(in oklab, var(--glow-color) 50%, transparent);
+    box-shadow: 0 0 2.5rem -0.75rem var(--glow-color);
+  }
+}
+
+@utility tinted {
+  --glow-color: var(--color-accent);
+  background-color: color-mix(in oklab, var(--glow-color) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--glow-color) 35%, transparent);
+}
+
+@utility text-gradient {
+  @apply bg-linear-to-r from-accent-2 via-accent to-accent-3 bg-clip-text text-transparent;
+}
+
+@utility ambient {
+  &::before,
+  &::after {
+    content: "";
+    @apply pointer-events-none fixed inset-0 -z-10;
+  }
+
+  &::before {
+    background:
+      radial-gradient(45rem 32rem at 5% -5%, color-mix(in oklab, var(--color-accent-2) var(--ambient-strength), transparent), transparent 70%),
+      radial-gradient(40rem 30rem at 100% 35%, color-mix(in oklab, var(--color-accent) var(--ambient-strength), transparent), transparent 70%),
+      radial-gradient(45rem 30rem at 25% 105%, color-mix(in oklab, var(--color-accent-3) var(--ambient-strength), transparent), transparent 70%);
+  }
+
+  &::after {
+    background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+    background-size: 1.5rem 1.5rem;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent);
   }
 }

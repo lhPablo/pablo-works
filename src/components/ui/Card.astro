@@ -1,17 +1,18 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<"div">;
+interface Props extends HTMLAttributes<"div"> {
+  as?: "div" | "article";
+  glowColor?: string;
+}
 
-const { class: className, ...attrs } = Astro.props;
+const { as: Tag = "div", class: className, glowColor, ...attrs } = Astro.props;
 ---
 
-<div
-  class:list={[
-    "flex flex-col border-2 border-white/10 bg-white/5 p-4 rounded-xl shadow-lg",
-    className,
-  ]}
+<Tag
+  class:list={["glass flex flex-col p-4", className]}
+  style={glowColor ? `--glow-color: ${glowColor}` : undefined}
   {...attrs}
 >
   <slot />
-</div>
+</Tag>
