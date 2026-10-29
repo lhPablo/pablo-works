@@ -41,6 +41,7 @@ const translations = getTranslations(Astro.currentLocale);
 
           if (entry.isIntersecting) {
             link.ariaCurrent = "true";
+            history.replaceState(null, "", `#${entry.target.id}`);
           } else {
             link.removeAttribute("aria-current");
           }
