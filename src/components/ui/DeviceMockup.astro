@@ -4,7 +4,8 @@ import laptopMask from "@assets/projects/devices/mask-laptop.png";
 import phoneMask from "@assets/projects/devices/mask-phone.png";
 import tabletMask from "@assets/projects/devices/mask-tablet.png";
 import type { ProjectMockup } from "@data/projects";
-import { Play } from "@lucide/astro";
+import { getTranslations } from "@lib/i18n";
+import { Pause, Play } from "@lucide/astro";
 import { getImage, Image } from "astro:assets";
 
 interface Props {
@@ -49,6 +50,7 @@ const screen = (device: keyof typeof SCREENS) => {
 };
 
 const { name, mockup } = Astro.props;
+const translations = getTranslations(Astro.currentLocale);
 const poster = await getImage({
   src: mockup.laptop.poster,
   width: 1360,
@@ -65,7 +67,7 @@ const poster = await getImage({
     loop
     playsinline
     preload="none"
-    aria-label={`Demo ${name}`}
+    aria-label={`${translations.demoVideo} ${name}`}
   >
     <source src={mockup.laptop.webm} type="video/webm" />
     <source src={mockup.laptop.mp4} type="video/mp4" />
@@ -88,23 +90,28 @@ const poster = await getImage({
   />
   <Image
     src={frame}
-    alt={`Preview ${name}`}
+    alt={`${translations.previewOf} ${name}`}
     widths={[800, 1200, 1600, 2200]}
     sizes="(min-width: 1024px) 1088px, (min-width: 768px) 608px, calc(100vw - 64px)"
     loading="eager"
     class="pointer-events-none relative h-auto w-full"
   />
-  <button
-    type="button"
-    class="absolute hidden cursor-pointer items-center justify-center"
+  <div
+    class="pointer-events-none absolute flex items-end justify-end p-[4%]"
     style={screen(DEVICE_SCREEN.LAPTOP)}
-    aria-label={`Reproducir demo ${name}`}
-    data-play
   >
-    <span class="rounded-full bg-black/60 p-4 text-white backdrop-blur-sm">
-      <Play class="h-6 w-6" />
-    </span>
-  </button>
+    <button
+      type="button"
+      class="group pointer-events-auto cursor-pointer rounded-full bg-black/60 p-2 text-white backdrop-blur-sm focus-ring"
+      aria-label={`${translations.playDemo}: ${name}`}
+      data-toggle
+      data-play-label={`${translations.playDemo}: ${name}`}
+      data-pause-label={`${translations.pauseDemo}: ${name}`}
+    >
+      <Play class="h-4 w-4 group-data-playing:hidden" />
+      <Pause class="hidden h-4 w-4 group-data-playing:block" />
+    </button>
+  </div>
 </div>
 
 <script>
@@ -114,30 +121,36 @@ const poster = await getImage({
     .querySelectorAll<HTMLElement>("[data-device-mockup]")
     .forEach((container) => {
       const video = container.querySelector("video");
-      const play = container.querySelector<HTMLButtonElement>("[data-play]");
+      const toggle =
+        container.querySelector<HTMLButtonElement>("[data-toggle]");
 
-      if (!video || !play) return;
+      if (!video || !toggle) return;
 
-      const showPlay = (visible: boolean) => {
-        play.classList.toggle("hidden", !visible);
-        play.classList.toggle("flex", visible);
+      // Once the user pauses, scrolling back into view must not restart it
+      let userPaused = reducedMotion.matches;
+
+      const sync = () => {
+        const playing = !video.paused;
+        toggle.toggleAttribute("data-playing", playing);
+        toggle.ariaLabel = playing
+          ? toggle.dataset.pauseLabel!
+          : toggle.dataset.playLabel!;
       };
 
-      const start = () =>
-        video
-          .play()
-          .then(() => showPlay(false))
-          .catch(() => showPlay(true));
+      video.addEventListener("play", sync);
+      video.addEventListener("pause", sync);
 
-      play.addEventListener("click", start);
-
-      if (reducedMotion.matches) {
-        showPlay(true);
-        return;
-      }
+      toggle.addEventListener("click", () => {
+        userPaused = !video.paused;
+        if (userPaused) video.pause();
+        else video.play().catch(sync);
+      });
 
       new IntersectionObserver(
-        ([entry]) => (entry.isIntersecting ? start() : video.pause()),
+        ([entry]) => {
+          if (!entry.isIntersecting) video.pause();
+          else if (!userPaused) video.play().catch(sync);
+        },
         { threshold: 0.4 },
       ).observe(container);
     });

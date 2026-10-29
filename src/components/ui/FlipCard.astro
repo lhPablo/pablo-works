@@ -1,22 +1,17 @@
 ---
 interface Props {
+  label: string;
   class?: string;
   faceClass?: string;
 }
 
-const { class: className, faceClass } = Astro.props;
+const { label, class: className, faceClass } = Astro.props;
 ---
 
-<div
-  class="group h-full rounded-xl perspective-distant focus-ring"
-  role="button"
-  tabindex="0"
-  aria-pressed="false"
-  data-flip-card
->
+<div class="group relative h-full rounded-xl perspective-distant" data-flip-card>
   <div
     class:list={[
-      "grid h-full transition-transform duration-500 motion-reduce:transition-none transform-3d group-data-hover:rotate-y-180 group-aria-pressed:rotate-y-180",
+      "grid h-full transition-transform duration-500 motion-reduce:transition-none transform-3d group-data-hover:rotate-y-180 group-data-flipped:rotate-y-180",
       className,
     ]}
   >
@@ -30,16 +25,30 @@ const { class: className, faceClass } = Astro.props;
       <slot name="back" />
     </div>
   </div>
+
+  <!-- Both faces stay in the accessibility tree; the button only flips them visually -->
+  <button
+    type="button"
+    class="absolute inset-0 z-10 cursor-pointer rounded-xl focus-ring"
+    aria-label={label}
+    aria-pressed="false"
+    data-flip-toggle></button>
 </div>
 
 <script>
   // Mouse flips on hover; touch and keyboard toggle each card.
   // Uses the event's pointer type: (hover: hover) is unreliable on some touch devices.
   document.querySelectorAll<HTMLElement>("[data-flip-card]").forEach((card) => {
+    const button = card.querySelector<HTMLButtonElement>("[data-flip-toggle]");
+    if (!button) return;
+
     let pointerType = "mouse";
 
-    const toggle = () =>
-      card.setAttribute("aria-pressed", String(card.ariaPressed !== "true"));
+    const toggle = () => {
+      const flipped = !card.hasAttribute("data-flipped");
+      card.toggleAttribute("data-flipped", flipped);
+      button.setAttribute("aria-pressed", String(flipped));
+    };
 
     card.addEventListener("pointerdown", (event) => {
       pointerType = event.pointerType;
@@ -53,14 +62,10 @@ const { class: className, faceClass } = Astro.props;
       delete card.dataset.hover;
     });
 
-    card.addEventListener("click", () => {
-      if (pointerType !== "mouse") toggle();
-    });
-
-    card.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      event.preventDefault();
-      toggle();
+    // Keyboard activation (Enter/Space) fires click with detail === 0
+    button.addEventListener("click", (event) => {
+      if (pointerType !== "mouse" || event.detail === 0) toggle();
+      pointerType = "mouse";
     });
   });
 </script>

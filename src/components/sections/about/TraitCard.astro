@@ -14,7 +14,7 @@ interface Props {
 const { title, description, icon: Icon, color } = Astro.props;
 ---
 
-<FlipCard class="min-h-44">
+<FlipCard class="min-h-44" label={title}>
   <Card
     slot="front"
     glowColor={color}

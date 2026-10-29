@@ -1,4 +1,5 @@
 ---
+import { getTranslations } from "@lib/i18n";
 import type { HTMLAttributes } from "astro/types";
 
 type IconComponent = (_props: { class?: string }) => any;
@@ -9,6 +10,9 @@ interface Props extends HTMLAttributes<"a"> {
 }
 
 const { icon: Icon, iconClass, ...attrs } = Astro.props;
+
+const translations = getTranslations(Astro.currentLocale);
+const opensInNewTab = attrs.target === "_blank";
 ---
 
 <div class="shimmer hover:scale-105 transition-transform duration-200">
@@ -26,5 +30,6 @@ const { icon: Icon, iconClass, ...attrs } = Astro.props;
         <slot />
       )
     }
+    {opensInNewTab && <span class="sr-only">{translations.opensInNewTab}</span>}
   </a>
 </div>

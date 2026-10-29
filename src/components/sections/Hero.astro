@@ -38,7 +38,7 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
     <p>
       {splitYears.before}{yearsOfExperience()}{splitYears.after}
     </p>
-    <nav class="flex flex-wrap gap-4 text-xs">
+    <div class="flex flex-wrap gap-4 text-xs">
       <ActionLink
         href={PROFILE.cv}
         target="_blank"
@@ -53,7 +53,6 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
         rel="noopener noreferrer"
         icon={LinkedinIcon}
         iconClass="h-4 w-4"
-        aria-label="Linkedin"
       >
         Linkedin
       </ActionLink>
@@ -61,11 +60,10 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
         href={`mailto:${PROFILE.email}`}
         icon={Mail}
         iconClass="h-4 w-4"
-        aria-label={translations.contact}
       >
         {translations.contact}
       </ActionLink>
-    </nav>
+    </div>
   </div>
 
   <div

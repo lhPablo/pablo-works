@@ -94,6 +94,16 @@ const ogLocaleAlternates = LANGUAGES.map(
     </script>
   </head>
   <body class="ambient">
+    {
+      showHeader && (
+        <a
+          href="#main-page"
+          class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-20 focus:rounded-xl focus:bg-surface focus:p-2 focus:shadow-nav focus-ring"
+        >
+          {translations.skipToContent}
+        </a>
+      )
+    }
     {showHeader && <Header />}
     <slot />
   </body>

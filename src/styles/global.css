@@ -70,7 +70,7 @@
   }
 
   html {
-    @apply scroll-smooth;
+    @apply motion-safe:scroll-smooth;
   }
 
   body {
@@ -96,7 +96,7 @@
 
 @utility focus-ring {
   &:focus-visible {
-    @apply outline-none ring-2 ring-accent/60;
+    @apply outline-none ring-2 ring-accent;
   }
 }
 
@@ -130,7 +130,7 @@
 
   &:first-child::after {
     content: "";
-    @apply absolute -z-1 top-1/2 left-(--timeline-x) size-5 rounded-full bg-accent/50 -translate-1/2 animate-ping;
+    @apply absolute -z-1 top-1/2 left-(--timeline-x) size-5 rounded-full bg-accent/50 -translate-1/2 motion-safe:animate-ping;
   }
 }
 

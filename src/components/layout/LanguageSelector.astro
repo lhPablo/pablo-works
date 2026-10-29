@@ -34,11 +34,11 @@ const hrefFor = (lang: Language) => `/${lang}/${rest}`;
           aria-label={LANGUAGE_NAMES[lang]}
           aria-current={isCurrent ? "true" : undefined}
           class:list={[
-            "rounded-full px-2 py-0.5 text-xs font-medium uppercase tracking-wide transition-colors",
+            "inline-flex min-h-6 min-w-6 items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium uppercase tracking-wide transition-colors",
             "focus-ring",
             isCurrent
               ? "bg-accent/10 text-accent font-semibold"
-              : "text-foreground/45 hover:text-accent",
+              : "text-muted hover:text-accent",
           ]}
         >
           {lang}
