@@ -2,7 +2,12 @@
 import "@styles/global.css";
 
 import Header from "@components/layout/Header.astro";
-import { DEFAULT_LANGUAGE, LANGUAGES } from "@lib/i18n";
+import {
+  DEFAULT_LANGUAGE,
+  getTranslations,
+  LANGUAGES,
+  translations as allTranslations,
+} from "@lib/i18n";
 import { Font } from "astro:assets";
 
 interface Props {
@@ -12,8 +17,18 @@ interface Props {
 
 const { showHeader = true, noindex = false } = Astro.props;
 
+const translations = getTranslations(Astro.currentLocale);
+
 const localeHref = (lang: string) =>
   new URL(Astro.url.pathname.replace(/^\/[^\/]+/, `/${lang}`), Astro.site).href;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+
+const ogImage = new URL("/og-image.png", Astro.site).href;
+
+const ogLocaleAlternates = LANGUAGES.map(
+  (lang) => allTranslations[lang].ogLocale,
+).filter((locale) => locale !== translations.ogLocale);
 ---
 
 <!doctype html>
@@ -29,10 +44,7 @@ const localeHref = (lang: string) =>
         <meta name="robots" content="noindex" />
       ) : (
         <>
-          <link
-            rel="canonical"
-            href={new URL(Astro.url.pathname, Astro.site).href}
-          />
+          <link rel="canonical" href={canonicalUrl} />
           {LANGUAGES.map((lang) => (
             <link rel="alternate" hreflang={lang} href={localeHref(lang)} />
           ))}
@@ -44,7 +56,26 @@ const localeHref = (lang: string) =>
         </>
       )
     }
-    <title>Pablo López — Software Engineer</title>
+    <title>{translations.metaTitle}</title>
+    <meta name="description" content={translations.metaDescription} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pablo López" />
+    <meta property="og:title" content={translations.metaTitle} />
+    <meta property="og:description" content={translations.metaDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={translations.metaTitle} />
+    <meta property="og:locale" content={translations.ogLocale} />
+    {
+      ogLocaleAlternates.map((locale) => (
+        <meta property="og:locale:alternate" content={locale} />
+      ))
+    }
+
+    <meta name="twitter:card" content="summary_large_image" />
 
     <Font cssVariable="--font-sans" preload />
     <Font cssVariable="--font-mono" />

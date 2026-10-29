@@ -1,4 +1,7 @@
 export default {
+  metaTitle: "Pablo López — Ingeniero de software",
+  metaDescription: "Ingeniero de software full-stack. Lidero el backend de una plataforma agtech que usan más de 400 empresas agroalimentarias. React, Java, Spring Boot y Kafka.",
+  ogLocale: "es_ES",
   heroGreeting: "Hola, soy {{name}}",
   heroParagraph: "{{yearsOfExperience}} años creando software para el sector agroalimentario. Hoy lidero el backend de una plataforma que usan más de 400 empresas y automatizo el desarrollo con IA para que el equipo llegue más lejos.",
   profile: "Perfil",

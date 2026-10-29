@@ -1,5 +1,8 @@
 
 export default {
+  metaTitle: "Pablo López — Software Engineer",
+  metaDescription: "Full-stack software engineer. I lead the backend of an agtech platform used by 400+ agrifood companies. React, Java, Spring Boot and Kafka.",
+  ogLocale: "en_US",
   heroGreeting: "Hello, I'm {{name}}",
   heroParagraph: "{{yearsOfExperience}} years building software for the agrifood industry. I now lead the backend of a platform used by 400+ companies and use AI to automate development so the team can go further.",
   profile: "Profile",
