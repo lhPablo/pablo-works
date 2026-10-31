@@ -19,13 +19,13 @@ export interface Project {
 const PROJECT_DATA = {
   songparty: {
     url: "https://songparty.net",
-    repo: "https://gitlab.com/lhPablo",
+    repo: "https://github.com/lhPablo/songparty",
     technologies: ["Next.js", "React", "Tailwind", "TypeScript"],
     color: "#ec4899"
   },
   wedding: {
     url: "https://paulaypablosecasan.com",
-    repo: "https://gitlab.com/lhPablo",
+    repo: "https://github.com/lhPablo/wedding-web",
     technologies: ["Astro", "TypeScript", "CSS"],
     color: "#7b93c9"
   },
