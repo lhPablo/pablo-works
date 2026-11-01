@@ -1,4 +1,5 @@
-import placeholder from "@assets/placeholder.webp"
+import profile from "@assets/profile.webp"
+import type { Language } from "@lib/i18n";
 
 export const PROFILE = {
     name: "Pablo López",
@@ -6,6 +7,6 @@ export const PROFILE = {
     careerStart: new Date('2018-01-01'),
     linkedin: "https://www.linkedin.com/in/pablo-lopezhernandez-valencia/",
     email: "p.lh@hotmail.com",
-    cv: "/CV_ES.pdf",
-    image: placeholder
+    cv: { es: "/CV_ES.pdf", en: "/CV_EN.pdf" } satisfies Record<Language, string>,
+    image: profile
 } as const;

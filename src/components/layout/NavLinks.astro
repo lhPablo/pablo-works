@@ -37,7 +37,10 @@ const translations = getTranslations(Astro.currentLocale);
       (entries) => {
         entries.forEach((entry) => {
           const link = links.get(entry.target.id);
-          if (!link) return;
+          if (!link) {
+            history.replaceState(null, "", " ");
+            return;
+          }
 
           if (entry.isIntersecting) {
             link.ariaCurrent = "true";

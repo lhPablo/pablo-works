@@ -4,14 +4,17 @@ import ActionLink from "@components/ui/ActionLink.astro";
 import { PROFILE } from "@data/profile";
 import { yearsOfExperience } from "@lib/experience";
 import {
+  DEFAULT_LANGUAGE,
   getTranslations,
+  type Language,
   splitByPlaceholder,
   type SplitByPlaceholderResult,
 } from "@lib/i18n";
 import { Mail } from "@lucide/astro";
 import { Image } from "astro:assets";
 
-const translations = getTranslations(Astro.currentLocale);
+const locale = (Astro.currentLocale ?? DEFAULT_LANGUAGE) as Language;
+const translations = getTranslations(locale);
 const splitName: SplitByPlaceholderResult = splitByPlaceholder(
   translations.heroGreeting,
   "{{name}}",
@@ -40,7 +43,7 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
     </p>
     <div class="flex flex-wrap gap-4 text-xs">
       <ActionLink
-        href={PROFILE.cv}
+        href={PROFILE.cv[locale]}
         target="_blank"
         rel="noopener noreferrer"
         id="downloadCV"
@@ -66,16 +69,15 @@ const splitYears: SplitByPlaceholderResult = splitByPlaceholder(
     </div>
   </div>
 
-  <div
-    class="flex shrink-0 rounded-2xl p-0.5 bg-linear-to-br from-accent-2 via-accent to-accent-3 shadow-[0_0_3rem_-0.75rem_var(--color-accent)]"
-  >
+  <div class="flex shrink-0 w-full max-w-80 sm:w-64 md:w-72 lg:w-80">
     <Image
       src={PROFILE.image}
       alt={translations.profile}
-      width={256}
-      height={256}
+      width={330}
+      height={440}
+      densities={[1, 2]}
       priority={true}
-      class="rounded-[0.875rem] short:size-40"
+      class="w-full h-auto rounded-3xl border border-border shadow-xl"
     />
   </div>
 </section>
