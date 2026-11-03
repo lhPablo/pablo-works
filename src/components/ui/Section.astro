@@ -1,0 +1,22 @@
+---
+import { getTranslations } from "@lib/i18n";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+interface Props {
+  id: string;
+  title: string;
+  component: AstroComponentFactory;
+}
+
+const { id, title, component: Component } = Astro.props;
+
+const translations = getTranslations(Astro.currentLocale);
+---
+
+<section
+  id={id}
+  aria-label={translations[title as keyof typeof translations] as string}
+  class="w-full min-h-svh px-4 pt-header flex flex-col items-center justify-center lg:max-w-4xl md:max-w-2xl"
+>
+  <Component />
+</section>

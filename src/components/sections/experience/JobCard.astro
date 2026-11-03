@@ -1,0 +1,27 @@
+---
+import Card from "@components/ui/Card.astro";
+import { formatPeriod } from "@lib/experience";
+import { DEFAULT_LANGUAGE, getTranslations } from "@lib/i18n";
+
+interface Props {
+  from: Date;
+  to: Date | null;
+  role: string;
+  description: string;
+}
+
+const { from, to, role, description } = Astro.props;
+
+const translations = getTranslations(Astro.currentLocale);
+const locale = Astro.currentLocale ?? DEFAULT_LANGUAGE;
+---
+
+<Card class="gap-2 hover:-translate-y-0.5">
+  <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+    <h4>{role}</h4>
+    <span class="font-mono text-xs text-muted">
+      {formatPeriod(from, to, locale, translations.present)}
+    </span>
+  </div>
+  <p class="text-foreground/85">{description}</p>
+</Card>

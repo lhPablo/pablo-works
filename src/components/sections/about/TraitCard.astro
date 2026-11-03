@@ -1,0 +1,38 @@
+---
+import Card from "@components/ui/Card.astro";
+import FlipCard from "@components/ui/FlipCard.astro";
+
+type IconComponent = (_props: { class?: string }) => any;
+
+interface Props {
+  title: string;
+  description: string;
+  icon: IconComponent;
+  color: string;
+}
+
+const { title, description, icon: Icon, color } = Astro.props;
+---
+
+<FlipCard class="min-h-44" label={title}>
+  <Card
+    slot="front"
+    glowColor={color}
+    class="h-full gap-4 p-5 items-center justify-center text-center"
+  >
+    <div
+      class="glow flex size-11 items-center justify-center"
+      style={`--glow-color: ${color}; color: ${color}`}
+    >
+      <Icon class="relative z-10 size-5" />
+    </div>
+    <h3 class="text-lg">{title}</h3>
+  </Card>
+  <Card
+    slot="back"
+    glowColor={color}
+    class="h-full p-5 items-center justify-center text-center"
+  >
+    <p class="text-sm text-muted leading-relaxed">{description}</p>
+  </Card>
+</FlipCard>

@@ -1,0 +1,20 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { DEFAULT_LANGUAGE, getTranslations } from "@lib/i18n";
+
+import ActionLink from "@/components/ui/ActionLink.astro";
+
+const translations = getTranslations(Astro.currentLocale);
+---
+
+<Layout showHeader={false} noindex>
+  <main
+    class="w-full h-screen flex flex-col items-center justify-center gap-4 p-4 text-center"
+  >
+    <p class="font-mono text-6xl font-semibold text-accent">404</p>
+    <h1>{translations.notFound}</h1>
+    <ActionLink href={`/${DEFAULT_LANGUAGE}/`}>
+      {translations.goHome}
+    </ActionLink>
+  </main>
+</Layout>

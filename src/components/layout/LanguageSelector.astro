@@ -1,0 +1,49 @@
+---
+import type { Language } from "@lib/i18n";
+import {
+  DEFAULT_LANGUAGE,
+  getTranslations,
+  LANGUAGE_NAMES,
+  LANGUAGES,
+} from "@lib/i18n";
+
+const translations = getTranslations(Astro.currentLocale);
+const currentLang = (Astro.currentLocale ?? DEFAULT_LANGUAGE) as Language;
+
+// First element always is the language, remove it to get the rest of the segments
+const [, ...segments] = Astro.url.pathname.split("/").filter(Boolean);
+const rest = segments.length > 0 ? `${segments.join("/")}/` : "";
+
+const hrefFor = (lang: Language) => `/${lang}/${rest}`;
+---
+
+<div
+  class="flex items-center gap-0.5"
+  role="group"
+  aria-label={translations.selectLanguage}
+>
+  {
+    LANGUAGES.map((lang: Language) => {
+      const isCurrent = lang === currentLang;
+
+      return (
+        <a
+          href={hrefFor(lang)}
+          hreflang={lang}
+          lang={lang}
+          aria-label={LANGUAGE_NAMES[lang]}
+          aria-current={isCurrent ? "true" : undefined}
+          class:list={[
+            "inline-flex min-h-6 min-w-6 items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium uppercase tracking-wide transition-colors",
+            "focus-ring",
+            isCurrent
+              ? "bg-accent/10 text-accent font-semibold"
+              : "text-muted hover:text-accent",
+          ]}
+        >
+          {lang}
+        </a>
+      );
+    })
+  }
+</div>

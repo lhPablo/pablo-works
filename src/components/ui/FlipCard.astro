@@ -1,0 +1,71 @@
+---
+interface Props {
+  label: string;
+  class?: string;
+  faceClass?: string;
+}
+
+const { label, class: className, faceClass } = Astro.props;
+---
+
+<div class="group relative h-full rounded-xl perspective-distant" data-flip-card>
+  <div
+    class:list={[
+      "grid h-full transition-transform duration-500 motion-reduce:transition-none transform-3d group-data-hover:rotate-y-180 group-data-flipped:rotate-y-180",
+      className,
+    ]}
+  >
+    <div class:list={["[grid-area:1/1] backface-hidden", faceClass]}>
+      <slot name="front" />
+    </div>
+
+    <div
+      class:list={["[grid-area:1/1] backface-hidden rotate-y-180", faceClass]}
+    >
+      <slot name="back" />
+    </div>
+  </div>
+
+  <!-- Both faces stay in the accessibility tree; the button only flips them visually -->
+  <button
+    type="button"
+    class="absolute inset-0 z-10 cursor-pointer rounded-xl focus-ring"
+    aria-label={label}
+    aria-pressed="false"
+    data-flip-toggle></button>
+</div>
+
+<script>
+  // Mouse flips on hover; touch and keyboard toggle each card.
+  // Uses the event's pointer type: (hover: hover) is unreliable on some touch devices.
+  document.querySelectorAll<HTMLElement>("[data-flip-card]").forEach((card) => {
+    const button = card.querySelector<HTMLButtonElement>("[data-flip-toggle]");
+    if (!button) return;
+
+    let pointerType = "mouse";
+
+    const toggle = () => {
+      const flipped = !card.hasAttribute("data-flipped");
+      card.toggleAttribute("data-flipped", flipped);
+      button.setAttribute("aria-pressed", String(flipped));
+    };
+
+    card.addEventListener("pointerdown", (event) => {
+      pointerType = event.pointerType;
+    });
+
+    card.addEventListener("pointerenter", (event) => {
+      if (event.pointerType === "mouse") card.dataset.hover = "";
+    });
+
+    card.addEventListener("pointerleave", () => {
+      delete card.dataset.hover;
+    });
+
+    // Keyboard activation (Enter/Space) fires click with detail === 0
+    button.addEventListener("click", (event) => {
+      if (pointerType !== "mouse" || event.detail === 0) toggle();
+      pointerType = "mouse";
+    });
+  });
+</script>

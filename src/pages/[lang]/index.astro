@@ -1,0 +1,25 @@
+---
+import Hero from "@components/sections/Hero.astro";
+import Section from "@components/ui/Section.astro";
+import { SECTIONS } from "@data/sections";
+import Layout from "@layouts/Layout.astro";
+import { getLocalePaths } from "@lib/i18n";
+
+export const getStaticPaths = getLocalePaths;
+---
+
+<Layout>
+  <main id="main-page" tabindex="-1" class="w-full flex flex-col items-center outline-none">
+    <Hero />
+
+    {
+      SECTIONS.map((section) => (
+        <Section
+          id={section.id}
+          title={section.title}
+          component={section.component}
+        />
+      ))
+    }
+  </main>
+</Layout>

@@ -1,23 +1,110 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import "@styles/global.css";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+import Header from "@components/layout/Header.astro";
+import {
+  DEFAULT_LANGUAGE,
+  getTranslations,
+  LANGUAGES,
+  translations as allTranslations,
+} from "@lib/i18n";
+import { Font } from "astro:assets";
+
+interface Props {
+  showHeader?: boolean;
+  noindex?: boolean;
+}
+
+const { showHeader = true, noindex = false } = Astro.props;
+
+const translations = getTranslations(Astro.currentLocale);
+
+const localeHref = (lang: string) =>
+  new URL(Astro.url.pathname.replace(/^\/[^\/]+/, `/${lang}`), Astro.site).href;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+
+const ogImage = new URL("/og-image.png", Astro.site).href;
+
+const ogLocaleAlternates = LANGUAGES.map(
+  (lang) => allTranslations[lang].ogLocale,
+).filter((locale) => locale !== translations.ogLocale);
+---
+
+<!doctype html>
+<html lang={Astro.currentLocale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="generator" content={Astro.generator} />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <>
+          <link rel="canonical" href={canonicalUrl} />
+          {LANGUAGES.map((lang) => (
+            <link rel="alternate" hreflang={lang} href={localeHref(lang)} />
+          ))}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={localeHref(DEFAULT_LANGUAGE)}
+          />
+        </>
+      )
+    }
+    <title>{translations.metaTitle}</title>
+    <meta name="description" content={translations.metaDescription} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pablo López" />
+    <meta property="og:title" content={translations.metaTitle} />
+    <meta property="og:description" content={translations.metaDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={translations.metaTitle} />
+    <meta property="og:locale" content={translations.ogLocale} />
+    {
+      ogLocaleAlternates.map((locale) => (
+        <meta property="og:locale:alternate" content={locale} />
+      ))
+    }
+
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-mono" />
+
+    <script is:inline>
+      const saved = localStorage.getItem("theme");
+
+      const systemDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+
+      const theme = saved || (systemDark ? "dark" : "light");
+
+      document.documentElement.setAttribute("data-theme", theme);
+    </script>
+  </head>
+  <body class="ambient">
+    {
+      showHeader && (
+        <a
+          href="#main-page"
+          class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-20 focus:rounded-xl focus:bg-surface focus:p-2 focus:shadow-nav focus-ring"
+        >
+          {translations.skipToContent}
+        </a>
+      )
+    }
+    {showHeader && <Header />}
+    <slot />
+  </body>
+</html>

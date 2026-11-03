@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  id: string;
+}
+
+const { class: className, ...attrs } = Astro.props;
+---
+
+<div
+  class:list={[
+    "flex absolute top-full right-0 mt-2 min-w-48 p-2 rounded-2xl bg-surface shadow-nav origin-top-right invisible opacity-0 -translate-y-2 scale-95 transition-[opacity,translate,scale,visibility] duration-200 ease-out motion-reduce:transition-none data-open:visible data-open:opacity-100 data-open:translate-y-0 data-open:scale-100 sm:static sm:mt-0 sm:min-w-0 sm:p-0 sm:rounded-none sm:bg-transparent sm:shadow-none sm:visible sm:opacity-100 sm:translate-y-0 sm:scale-100 sm:transition-none",
+    className,
+  ]}
+  {...attrs}
+>
+  <slot />
+</div>

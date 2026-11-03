@@ -1,0 +1,69 @@
+---
+import CodeIcon from "@components/icons/Code.astro";
+import type { Project } from "@data/projects";
+import { getSkill } from "@data/skills";
+import { getTranslations } from "@lib/i18n";
+import { ExternalLink } from "@lucide/astro";
+
+import ActionLink from "@/components/ui/ActionLink.astro";
+import Card from "@/components/ui/Card.astro";
+import Chip from "@/components/ui/Chip.astro";
+import DeviceMockup from "@/components/ui/DeviceMockup.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { id, url, repo, technologies, color, mockup } = Astro.props.project;
+
+const translations = getTranslations(Astro.currentLocale);
+const { name, description } = translations.projectItems[id];
+---
+
+<Card as="article" glowColor={color} class="gap-8 p-6">
+  <div class="flex flex-col gap-10">
+    <h3>{name}</h3>
+    <DeviceMockup name={name} mockup={mockup} />
+
+    <div class="flex flex-col gap-5">
+      <ul class="flex flex-wrap gap-3">
+        {
+          technologies.map((technologyName) => {
+            const skill = getSkill(technologyName);
+
+            return skill ? (
+              <li>
+                <Chip icon={skill.icon} color={skill.color}>
+                  {skill.name}
+                </Chip>
+              </li>
+            ) : null;
+          })
+        }
+      </ul>
+    </div>
+
+    <p class="text-foreground/85">{description}</p>
+
+    <div class="flex text-xs gap-5">
+      <ActionLink
+        href={repo}
+        target="_blank"
+        rel="noopener noreferrer"
+        icon={CodeIcon}
+        iconClass="h-4 w-4"
+      >
+        {translations.code}
+      </ActionLink>
+      <ActionLink
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        icon={ExternalLink}
+        iconClass="h-4 w-4"
+      >
+        {translations.visitWebsite}
+      </ActionLink>
+    </div>
+  </div>
+</Card>

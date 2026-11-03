@@ -1,0 +1,47 @@
+---
+import JobCard from "@components/sections/experience/JobCard.astro";
+import SectionTitle from "@components/ui/SectionTitle.astro";
+import { EXPERIENCE } from "@data/experience";
+import { formatPeriod } from "@lib/experience";
+import { DEFAULT_LANGUAGE, getTranslations } from "@lib/i18n";
+
+const translations = getTranslations(Astro.currentLocale);
+const locale = Astro.currentLocale ?? DEFAULT_LANGUAGE;
+---
+
+<SectionTitle
+  title={translations.experience}
+  description={translations.experienceParagraph}
+/>
+
+<div class="flex flex-col gap-10 w-full max-w-2xl">
+  {
+    EXPERIENCE.map(({ company, jobs }) => (
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+          <h3>{company}</h3>
+          <span class="font-mono text-xs text-muted">
+            {formatPeriod(
+              jobs.at(-1)!.from,
+              jobs[0].to,
+              locale,
+              translations.present,
+            )}
+          </span>
+        </div>
+        <ol class="timeline flex flex-col gap-5 py-2 ml-5 lg:ml-0">
+          {jobs.map((job) => (
+            <li class="timeline-dot">
+              <JobCard
+                from={job.from}
+                to={job.to}
+                role={job.role}
+                description={translations.jobs[job.id]}
+              />
+            </li>
+          ))}
+        </ol>
+      </div>
+    ))
+  }
+</div>

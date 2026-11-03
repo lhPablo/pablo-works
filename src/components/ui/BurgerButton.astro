@@ -1,0 +1,34 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"button"> {
+  controls: string;
+  label: string;
+}
+
+const { controls, label, class: className, ...attrs } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={[
+    "group rounded-full p-0.5 hover:text-accent transition-colors focus-ring cursor-pointer",
+    className,
+  ]}
+  aria-label={label}
+  aria-controls={controls}
+  aria-expanded="false"
+  {...attrs}
+>
+  <span class="relative block h-5 w-5" aria-hidden="true">
+    <span
+      class="absolute left-0.5 top-1 h-0.5 w-4 rounded-full bg-current transition-transform duration-300 ease-out motion-reduce:transition-none group-aria-expanded:translate-y-1.25 group-aria-expanded:rotate-45"
+    ></span>
+    <span
+      class="absolute left-0.5 top-2.25 h-0.5 w-4 rounded-full bg-current transition-[opacity,scale] duration-200 ease-out motion-reduce:transition-none group-aria-expanded:scale-x-0 group-aria-expanded:opacity-0"
+    ></span>
+    <span
+      class="absolute left-0.5 top-3.5 h-0.5 w-4 rounded-full bg-current transition-transform duration-300 ease-out motion-reduce:transition-none group-aria-expanded:-translate-y-1.25 group-aria-expanded:-rotate-45"
+    ></span>
+  </span>
+</button>

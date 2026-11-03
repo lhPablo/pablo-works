@@ -1,0 +1,256 @@
+@import "tailwindcss";
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --color-accent: #f03a17;
+  --color-accent-2: #0093c4;
+  --color-accent-3: #f29a00;
+  --color-highlight: #ffb000;
+
+  --color-background: #f7f7f8;
+  --color-surface: #ffffff;
+  --color-foreground: #16171b;
+  --color-muted: #5c5f68;
+  --color-border: #16171b1f;
+
+  --color-nav: #ffffffd9;
+  --ambient-strength: 16%;
+  --shadow-nav:
+    0 10px 15px -3px #0000001a,
+    0 4px 6px -4px #0000001a;
+  --spacing-header: 5rem;
+
+  --animate-shimmer: shimmer 3s linear infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 15% 15%;
+    }
+
+    to {
+      background-position: 85% 85%;
+    }
+  }
+
+  --animate-nav-appear: nav-appear 1s linear both;
+
+  @keyframes nav-appear {
+    from {
+      box-shadow: none;
+      backdrop-filter: none;
+      background-color: var(--color-background);
+    }
+
+    to {
+      box-shadow: var(--shadow-nav);
+      backdrop-filter: blur(12px);
+      background-color: var(--color-nav);
+    }
+  }
+}
+
+@layer base {
+  :root[data-theme="dark"] {
+    --color-accent: #ffb000;
+    --color-accent-2: #ff5a36;
+    --color-accent-3: #5fb7c9;
+    --color-highlight: #fff4d6;
+
+    --color-background: #0e0c08;
+    --color-surface: #1a1712;
+    --color-foreground: #ece4d2;
+    --color-muted: #a39a86;
+    --color-border: #ffffff1a;
+
+    --color-nav: #1d1a14e6;
+    --ambient-strength: 11%;
+    --shadow-nav:
+      0 8px 24px -6px #00000073,
+      0 4px 8px -4px #0000004d;
+  }
+
+  html {
+    @apply motion-safe:scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl font-bold tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold tracking-tight;
+  }
+
+  h3 {
+    @apply text-xl font-semibold tracking-tight;
+  }
+
+  h4 {
+    @apply font-semibold;
+  }
+}
+
+@utility focus-ring {
+  &:focus-visible {
+    @apply outline-none ring-2 ring-accent;
+  }
+}
+
+@utility frosted-on-scroll {
+  @apply backdrop-blur-md bg-nav shadow-(--shadow-nav);
+
+  @supports (animation-timeline: scroll()) {
+    @apply animate-nav-appear;
+    animation-timeline: scroll(root block);
+    animation-range: 0 100px;
+  }
+}
+
+@utility timeline {
+  --timeline-x: --spacing(-5);
+  @apply relative isolate;
+
+  &::before {
+    content: "";
+    @apply absolute -z-2 top-0 left-(--timeline-x) w-0.5 h-full rounded-xl bg-linear-to-b from-accent via-accent-2 to-accent-3/0 -translate-x-1/2;
+  }
+}
+
+@utility timeline-dot {
+  @apply relative;
+
+  &::before {
+    content: "";
+    @apply absolute -z-1 top-1/2 left-(--timeline-x) size-3 rounded-full bg-accent -translate-1/2;
+  }
+
+  &:first-child::after {
+    content: "";
+    @apply absolute -z-1 top-1/2 left-(--timeline-x) size-5 rounded-full bg-accent/50 -translate-1/2 motion-safe:animate-ping;
+  }
+}
+
+@utility glow {
+  @apply relative isolate;
+
+  &::after {
+    content: "";
+    @apply absolute -z-2 top-1/2 left-1/2 size-2.5 rounded-full -translate-1/2 transition-shadow duration-700;
+    box-shadow: 0 0 2.1875rem 0.5rem var(--glow-color);
+  }
+
+  &:hover::after {
+    box-shadow: 0 0 2.1875rem 0.9375rem var(--glow-color);
+  }
+
+  &::before {
+    content: "";
+    @apply absolute -z-1 inset-0 rounded-xl border border-transparent backdrop-blur-xl transition-[border-color,backdrop-filter] duration-700;
+  }
+
+  &:hover::before {
+    @apply backdrop-blur-lg border-(--glow-color);
+  }
+}
+
+@utility shimmer {
+  --shimmer-opacity: 0;
+  --shimmer-thickness: 1px;
+  --shimmer-offset: 1px;
+  --shimmer-radius: 0.75rem;
+
+  --shimmer-gradient: linear-gradient(
+    160deg,
+    transparent 0%,
+    var(--color-highlight) 18%,
+    var(--color-accent) 26%,
+    transparent 34%,
+    transparent 50%,
+    var(--color-highlight) 68%,
+    var(--color-accent) 76%,
+    transparent 84%,
+    transparent 100%
+  );
+
+  @apply relative inline-flex isolate rounded-(--shimmer-radius);
+
+  &::before,
+  &::after {
+    content: "";
+    @apply pointer-events-none absolute opacity-(--shimmer-opacity) animate-shimmer motion-reduce:animate-none transition-opacity duration-200 ease-[cubic-bezier(0.22,0.61,0.36,1)];
+    background: var(--shimmer-gradient) 15% 15% / 300% 300%;
+  }
+
+  &::before {
+    @apply inset-0 -z-1 rounded-[inherit] blur-md -translate-z-px;
+    opacity: calc(var(--shimmer-opacity) * 0.4);
+  }
+
+  &::after {
+    @apply p-(--shimmer-thickness);
+    inset: calc(-1 * (var(--shimmer-offset) + var(--shimmer-thickness)) + 1px);
+    border-radius: calc(var(--shimmer-radius) + var(--shimmer-offset) + var(--shimmer-thickness));
+
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+
+  &:hover,
+  &:focus-within {
+    --shimmer-opacity: 1;
+  }
+}
+
+@utility glass {
+  --glow-color: var(--color-accent);
+  @apply relative isolate rounded-xl border border-border bg-surface/60 shadow-sm backdrop-blur-xl transition-[border-color,box-shadow,translate] duration-500 dark:shadow-none;
+
+  /* Flip card faces rotate under a still pointer, so hover is tracked on the card itself */
+  &:hover,
+  [data-flip-card]:hover & {
+    border-color: color-mix(in oklab, var(--glow-color) 50%, transparent);
+    box-shadow: 0 0 2.5rem -0.75rem var(--glow-color);
+  }
+}
+
+@utility tinted {
+  --glow-color: var(--color-accent);
+  background-color: color-mix(in oklab, var(--glow-color) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--glow-color) 35%, transparent);
+}
+
+@utility text-gradient {
+  @apply bg-linear-to-r from-accent-2 via-accent to-accent-3 bg-clip-text text-transparent;
+}
+
+@utility ambient {
+  &::before,
+  &::after {
+    content: "";
+    @apply pointer-events-none fixed inset-0 -z-10;
+  }
+
+  &::before {
+    background:
+      radial-gradient(45rem 32rem at 5% -5%, color-mix(in oklab, var(--color-accent-2) var(--ambient-strength), transparent), transparent 70%),
+      radial-gradient(40rem 30rem at 100% 35%, color-mix(in oklab, var(--color-accent) var(--ambient-strength), transparent), transparent 70%),
+      radial-gradient(45rem 30rem at 25% 105%, color-mix(in oklab, var(--color-accent-3) var(--ambient-strength), transparent), transparent 70%);
+  }
+
+  &::after {
+    background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+    background-size: 1.5rem 1.5rem;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent);
+  }
+}
