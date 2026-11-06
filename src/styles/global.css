@@ -2,7 +2,7 @@
 @variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-  --color-accent: #f03a17;
+  --color-accent: #c42501;
   --color-accent-2: #0093c4;
   --color-accent-3: #f29a00;
   --color-highlight: #ffb000;

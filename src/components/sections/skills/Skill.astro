@@ -1,21 +1,32 @@
 ---
+import {
+  THEME_GLOW_CLASS,
+  type ThemeColor,
+  themeGlowStyle,
+} from "@lib/theme-color";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 
 interface Props {
   name: string;
   icon: AstroComponentFactory;
-  color: string;
+  color: ThemeColor;
 }
 
 const { name, icon: Icon, color } = Astro.props;
 ---
 
 <div
-  class="glow flex items-center justify-center p-4"
-  style={`--glow-color: ${color}`}
+  class:list={[
+    "glow flex flex-col items-center justify-center gap-1.5 p-4 max-sm:w-18 max-sm:px-1 max-sm:py-3",
+    THEME_GLOW_CLASS,
+  ]}
+  style={themeGlowStyle(color)}
   title={name}
-  role="img"
-  aria-label={name}
 >
   <Icon class="relative z-10 h-8 w-8 pointer-events-none" />
+  <span
+    class="relative z-10 text-[0.625rem] font-medium leading-tight text-center text-(--glow-color) sm:sr-only"
+  >
+    {name}
+  </span>
 </div>

@@ -17,72 +17,72 @@ export const SKILLS = [
   {
     name: "Java",
     icon: JavaIcon,
-    color: "#00618bff"
+    color: { light: "#00618b", dark: "#3b89b5" }
   },
   {
     name: "Spring Boot",
     icon: SpringBootIcon,
-    color: "#64bd45ff"
+    color: { light: "#2d7a03", dark: "#64bd45" }
   },
   {
     name: "Kafka",
     icon: KafkaIcon,
-    color: "#6b7280ff"
+    color: { light: "#646b79", dark: "#7b8290" }
   },
   {
     name: "PostgreSQL",
     icon: PostgresIcon,
-    color: "#4169e1ff"
+    color: { light: "#3a61d8", dark: "#507af4" }
   },
   {
     name: "AWS",
     icon: AwsIcon,
-    color: "#ff9900ff"
+    color: { light: "#9b5b00", dark: "#ff9900" }
   },
   {
     name: "TypeScript",
     icon: TypescriptIcon,
-    color: "#0090e0ff"
+    color: { light: "#026ead", dark: "#0090e0" }
   },
   {
     name: "JavaScript",
     icon: JavascriptIcon,
-    color: "#ffd100ff"
+    color: { light: "#806801", dark: "#ffd100" }
   },
   {
     name: "React",
     icon: ReactIcon,
-    color: "#61dafbff"
+    color: { light: "#03748c", dark: "#61dafb" }
   },
   {
     name: "Next.js",
     icon: NextIcon,
-    color: "#6b7280ff"
+    color: { light: "#646b79", dark: "#7b8290" }
   },
   {
     name: "Angular",
     icon: AngularIcon,
-    color: "#dd0031ff"
+    color: { light: "#d5002f", dark: "#f53045" }
   },
   {
     name: "Astro",
     icon: AstroIcon,
-    color: "#BC52EE"
+    color: { light: "#a133d1", dark: "#bc52ee" }
   },
   {
     name: "Tailwind",
     icon: TailwindIcon,
-    color: "#06b6d4ff"
+    color: { light: "#067488", dark: "#06b6d4" }
   },
   {
     name: "HTML",
     icon: HtmlIcon,
-    color: "#ff6700ff"
+    color: { light: "#b64802", dark: "#ff6700" }
   },
   {
     name: "CSS",
     icon: CssIcon,
-    color: "#1874c3ff"
+    color: { light: "#096cbb", dark: "#2f85d5" }
   }
 ] as const;
 

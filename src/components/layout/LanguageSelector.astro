@@ -31,7 +31,6 @@ const hrefFor = (lang: Language) => `/${lang}/${rest}`;
           href={hrefFor(lang)}
           hreflang={lang}
           lang={lang}
-          aria-label={LANGUAGE_NAMES[lang]}
           aria-current={isCurrent ? "true" : undefined}
           class:list={[
             "inline-flex min-h-6 min-w-6 items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium uppercase tracking-wide transition-colors",
@@ -42,6 +41,7 @@ const hrefFor = (lang: Language) => `/${lang}/${rest}`;
           ]}
         >
           {lang}
+          <span class="sr-only">({LANGUAGE_NAMES[lang]})</span>
         </a>
       );
     })

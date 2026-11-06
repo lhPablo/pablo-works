@@ -60,9 +60,9 @@ const poster = await getImage({
 
 <div class="relative" data-device-mockup>
   <video
-    class="absolute object-cover"
+    class="absolute bg-black object-cover"
     style={screen(DEVICE_SCREEN.LAPTOP)}
-    poster={poster.src}
+    data-poster={poster.src}
     muted
     loop
     playsinline
@@ -153,5 +153,16 @@ const poster = await getImage({
         },
         { threshold: 0.4 },
       ).observe(container);
+
+      // A poster attribute downloads eagerly, so it is only set when the mockup gets near the viewport
+      const posterObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          video.poster = video.dataset.poster!;
+          posterObserver.disconnect();
+        },
+        { rootMargin: "100% 0px" },
+      );
+      posterObserver.observe(container);
     });
 </script>
