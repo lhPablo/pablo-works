@@ -5,7 +5,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   // TODO: dominio pendiente de compra.
-  site: 'https://pablo.works',
+  site: 'https://pablolh.dev',
 
   vite: {
     plugins: [tailwindcss()],
