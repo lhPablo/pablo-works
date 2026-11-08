@@ -5,7 +5,7 @@ export const PROFILE = {
     name: "Pablo López",
     role: "Senior Full-stack Developer",
     careerStart: new Date('2018-01-01'),
-    linkedin: "https://www.linkedin.com/in/pablo-lopezhernandez-valencia/",
+    linkedin: "https://www.linkedin.com/in/pablolh/",
     email: "p.lh@hotmail.com",
     cv: { es: "/CV_ES.pdf", en: "/CV_EN.pdf" } satisfies Record<Language, string>,
     image: profile
